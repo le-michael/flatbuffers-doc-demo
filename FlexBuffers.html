@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Flexbuffers - Flatbuffers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="FlatBuffers.html"><strong aria-hidden="true">1.</strong> Flatbuffers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Internals.html"><strong aria-hidden="true">1.1.</strong> Flatbuffers internals</a></li></ol></li><li class="chapter-item expanded "><a href="Schemas.html"><strong aria-hidden="true">2.</strong> Writing a schema</a></li><li class="chapter-item expanded "><a href="Compiler.html"><strong aria-hidden="true">3.</strong> flatc CLI</a></li><li class="chapter-item expanded "><a href="FlexBuffers.html" class="active"><strong aria-hidden="true">4.</strong> Flexbuffers</a></li><li class="chapter-item expanded "><a href="Benchmarks.html"><strong aria-hidden="true">5.</strong> Benchmarks</a></li><li class="chapter-item expanded "><a href="Support.html"><strong aria-hidden="true">6.</strong> Language Support</a></li><li class="chapter-item expanded "><a href="Tutorial.html"><strong aria-hidden="true">7.</strong> Tutorial</a></li><li class="chapter-item expanded "><a href="WhitePaper.html"><strong aria-hidden="true">8.</strong> White Paper</a></li><li class="chapter-item expanded affix "><li class="part-title">Guides</li><li class="chapter-item expanded "><a href="CppUsage.html"><strong aria-hidden="true">9.</strong> C++ Usage</a></li><li class="chapter-item expanded "><a href="CsharpUsage.html"><strong aria-hidden="true">10.</strong> C# Usage</a></li><li class="chapter-item expanded "><a href="CUsage.html"><strong aria-hidden="true">11.</strong> C Usage</a></li><li class="chapter-item expanded "><a href="DartUsage.html"><strong aria-hidden="true">12.</strong> Dart Usage</a></li><li class="chapter-item expanded "><a href="GoUsage.html"><strong aria-hidden="true">13.</strong> Go Usage</a></li><li class="chapter-item expanded "><a href="JavaScriptUsage.html"><strong aria-hidden="true">14.</strong> JavaScript Usage</a></li><li class="chapter-item expanded "><a href="JavaUsage.html"><strong aria-hidden="true">15.</strong> Java Usage</a></li><li class="chapter-item expanded "><a href="KotlinUsage.html"><strong aria-hidden="true">16.</strong> Kotlin Usage</a></li><li class="chapter-item expanded "><a href="LobsterUsage.html"><strong aria-hidden="true">17.</strong> Lobster Usage</a></li><li class="chapter-item expanded "><a href="LuaUsage.html"><strong aria-hidden="true">18.</strong> Lua Usage</a></li><li class="chapter-item expanded "><a href="PHPUsage.html"><strong aria-hidden="true">19.</strong> PHP Usage</a></li><li class="chapter-item expanded "><a href="PythonUsage.html"><strong aria-hidden="true">20.</strong> Python Usage</a></li><li class="chapter-item expanded "><a href="RustUsage.html"><strong aria-hidden="true">21.</strong> Rust Usage</a></li><li class="chapter-item expanded "><a href="SwiftUsage.html"><strong aria-hidden="true">22.</strong> Swift Usage</a></li><li class="chapter-item expanded "><a href="TypeScriptUsage.html"><strong aria-hidden="true">23.</strong> TypeScript Usage</a></li><li class="chapter-item expanded affix "><li class="part-title">Contributing</li><li class="chapter-item expanded "><a href="Building.html"><strong aria-hidden="true">24.</strong> Building</a></li><li class="chapter-item expanded "><a href="Grammar.html"><strong aria-hidden="true">25.</strong> Schema Grammar</a></li><li class="chapter-item expanded "><a href="IntermediateRepresentation.html"><strong aria-hidden="true">26.</strong> Intermediate Representation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Flatbuffers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="flexbuffers"><a class="header" href="#flexbuffers">FlexBuffers</a></h1>
+<p>FlatBuffers was designed around schemas, because when you want maximum
+performance and data consistency, strong typing is helpful.</p>
+<p>There are however times when you want to store data that doesn't fit a
+schema, because you can't know ahead of time what all needs to be stored.</p>
+<p>For this, FlatBuffers has a dedicated format, called FlexBuffers.
+This is a binary format that can be used in conjunction
+with FlatBuffers (by storing a part of a buffer in FlexBuffers
+format), or also as its own independent serialization format.</p>
+<p>While it loses the strong typing, you retain the most unique advantage
+FlatBuffers has over other serialization formats (schema-based or not):
+FlexBuffers can also be accessed without parsing / copying / object allocation.
+This is a huge win in efficiency / memory friendly-ness, and allows unique
+use cases such as mmap-ing large amounts of free-form data.</p>
+<p>FlexBuffers' design and implementation allows for a very compact encoding,
+combining automatic pooling of strings with automatic sizing of containers to
+their smallest possible representation (8/16/32/64 bits). Many values and
+offsets can be encoded in just 8 bits. While a schema-less representation is
+usually more bulky because of the need to be self-descriptive, FlexBuffers
+generates smaller binaries for many cases than regular FlatBuffers.</p>
+<p>FlexBuffers is still slower than regular FlatBuffers though, so we recommend to
+only use it if you need it.</p>
+<h1 id="usage-in-c"><a class="header" href="#usage-in-c">Usage in C++</a></h1>
+<p>Include the header <code>flexbuffers.h</code>, which in turn depends on <code>flatbuffers.h</code>
+and <code>util.h</code>.</p>
+<p>To create a buffer:</p>
+<pre><code class="language-{.cpp}">flexbuffers::Builder fbb;
+fbb.Int(13);
+fbb.Finish();
+</code></pre>
+<p>You create any value, followed by <code>Finish</code>. Unlike FlatBuffers which requires
+the root value to be a table, here any value can be the root, including a lonely
+int value.</p>
+<p>You can now access the <code>std::vector&lt;uint8_t&gt;</code> that contains the encoded value
+as <code>fbb.GetBuffer()</code>. Write it, send it, or store it in a parent FlatBuffer. In
+this case, the buffer is just 3 bytes in size.</p>
+<p>To read this value back, you could just say:</p>
+<pre><code class="language-{.cpp}">auto root = flexbuffers::GetRoot(my_buffer);
+int64_t i = root.AsInt64();
+</code></pre>
+<p>FlexBuffers stores ints only as big as needed, so it doesn't differentiate
+between different sizes of ints. You can ask for the 64 bit version,
+regardless of what you put in. In fact, since you demand to read the root
+as an int, if you supply a buffer that actually contains a float, or a
+string with numbers in it, it will convert it for you on the fly as well,
+or return 0 if it can't. If instead you actually want to know what is inside
+the buffer before you access it, you can call <code>root.GetType()</code> or <code>root.IsInt()</code>
+etc.</p>
+<p>Here's a slightly more complex value you could write instead of <code>fbb.Int</code> above:</p>
+<pre><code class="language-{.cpp}">fbb.Map([&amp;]() {
+  fbb.Vector(&quot;vec&quot;, [&amp;]() {
+    fbb.Int(-100);
+    fbb.String(&quot;Fred&quot;);
+    fbb.IndirectFloat(4.0f);
+  });
+  fbb.UInt(&quot;foo&quot;, 100);
+});
+</code></pre>
+<p>This stores the equivalent of the JSON value
+<code>{ vec: [ -100, &quot;Fred&quot;, 4.0 ], foo: 100 }</code>. The root is a dictionary that has
+just two key-value pairs, with keys <code>vec</code> and <code>foo</code>. Unlike FlatBuffers, it
+actually has to store these keys in the buffer (which it does only once if
+you store multiple such objects, by pooling key values), but also unlike
+FlatBuffers it has no restriction on the keys (fields) that you use.</p>
+<p>The map constructor uses a C++11 Lambda to group its children, but you can
+also use more conventional start/end calls if you prefer.</p>
+<p>The first value in the map is a vector. You'll notice that unlike FlatBuffers,
+you can use mixed types. There is also a <code>TypedVector</code> variant that only
+allows a single type, and uses a bit less memory.</p>
+<p><code>IndirectFloat</code> is an interesting feature that allows you to store values
+by offset rather than inline. Though that doesn't make any visible change
+to the user, the consequence is that large values (especially doubles or
+64 bit ints) that occur more than once can be shared (see ReuseValue).
+Another use case is inside of vectors, where the largest element makes
+up the size of all elements (e.g. a single double forces all elements to
+64bit), so storing a lot of small integers together with a double is more efficient if the double is indirect.</p>
+<p>Accessing it:</p>
+<pre><code class="language-{.cpp}">auto map = flexbuffers::GetRoot(my_buffer).AsMap();
+map.size();  // 2
+auto vec = map[&quot;vec&quot;].AsVector();
+vec.size();  // 3
+vec[0].AsInt64();  // -100;
+vec[1].AsString().c_str();  // &quot;Fred&quot;;
+vec[1].AsInt64();  // 0 (Number parsing failed).
+vec[2].AsDouble();  // 4.0
+vec[2].AsString().IsTheEmptyString();  // true (Wrong Type).
+vec[2].AsString().c_str();  // &quot;&quot; (This still works though).
+vec[2].ToString().c_str();  // &quot;4&quot; (Or have it converted).
+map[&quot;foo&quot;].AsUInt8();  // 100
+map[&quot;unknown&quot;].IsNull();  // true
+</code></pre>
+<h1 id="usage-in-java"><a class="header" href="#usage-in-java">Usage in Java</a></h1>
+<p>Java implementation follows the C++ one, closely.</p>
+<p>For creating the equivalent of the same JSON <code>{ vec: [ -100, &quot;Fred&quot;, 4.0 ], foo: 100 }</code>,
+one could use the following code:</p>
+<pre><code class="language-{.java}">FlexBuffersBuilder builder = new FlexBuffersBuilder(ByteBuffer.allocate(512),
+		                                                FlexBuffersBuilder.BUILDER_FLAG_SHARE_KEYS_AND_STRINGS);
+int smap = builder.startMap();
+int svec = builder.startVector();
+builder.putInt(-100);
+builder.putString(&quot;Fred&quot;);
+builder.putFloat(4.0);
+builder.endVector(&quot;vec&quot;, svec, false, false);
+builder.putInt(&quot;foo&quot;, 100);
+builder.endMap(null, smap);
+ByteBuffer bb = builder.finish();
+</code></pre>
+<p>Similarly, to read the data, just:</p>
+<pre><code class="language-{.java}">FlexBuffers.Map map = FlexBuffers.getRoot(bb).asMap();
+map.size();  // 2
+FlexBuffers.Vector vec = map.get(&quot;vec&quot;).asVector();
+vec.size();  // 3
+vec.get(0).asLong();  // -100;
+vec.get(1).asString();  // &quot;Fred&quot;;
+vec.get(1).asLong();  // 0 (Number parsing failed).
+vec.get(2).asFloat();  // 4.0
+vec.get(2).asString().isEmpty();  // true (Wrong Type).
+vec.get(2).asString();  // &quot;&quot; (This still works though).
+vec.get(2).toString();  // &quot;4.0&quot; (Or have it converted).
+map.get(&quot;foo&quot;).asUInt();  // 100
+map.get(&quot;unknown&quot;).isNull();  // true
+</code></pre>
+<h1 id="binary-encoding"><a class="header" href="#binary-encoding">Binary encoding</a></h1>
+<p>A description of how FlexBuffers are encoded is in the
+[internals](@ref flatbuffers_internals) document.</p>
+<h1 id="nesting-inside-a-flatbuffer"><a class="header" href="#nesting-inside-a-flatbuffer">Nesting inside a FlatBuffer</a></h1>
+<p>You can mark a field as containing a FlexBuffer, e.g.</p>
+<pre><code>a:[ubyte] (flexbuffer);
+</code></pre>
+<p>A special accessor will be generated that allows you to access the root value
+directly, e.g. <code>a_flexbuffer_root().AsInt64()</code>.</p>
+<h1 id="efficiency-tips"><a class="header" href="#efficiency-tips">Efficiency tips</a></h1>
+<ul>
+<li>Vectors generally are a lot more efficient than maps, so prefer them over maps
+when possible for small objects. Instead of a map with keys <code>x</code>, <code>y</code> and <code>z</code>,
+use a vector. Better yet, use a typed vector. Or even better, use a fixed
+size typed vector.</li>
+<li>Maps are backwards compatible with vectors, and can be iterated as such.
+You can iterate either just the values (<code>map.Values()</code>), or in parallel with
+the keys vector (<code>map.Keys()</code>). If you intend
+to access most or all elements, this is faster than looking up each element
+by key, since that involves a binary search of the key vector.</li>
+<li>When possible, don't mix values that require a big bit width (such as double)
+in a large vector of smaller values, since all elements will take on this
+width. Use <code>IndirectDouble</code> when this is a possibility. Note that
+integers automatically use the smallest width possible, i.e. if you ask
+to serialize an int64_t whose value is actually small, you will use less
+bits. Doubles are represented as floats whenever possible losslessly, but
+this is only possible for few values.
+Since nested vectors/maps are stored over offsets, they typically don't
+affect the vector width.</li>
+<li>To store large arrays of byte data, use a blob. If you'd use a typed
+vector, the bit width of the size field may make it use more space than
+expected, and may not be compatible with <code>memcpy</code>.
+Similarly, large arrays of (u)int16_t may be better off stored as a
+binary blob if their size could exceed 64k elements.
+Construction and use are otherwise similar to strings.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Compiler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="Benchmarks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Compiler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="Benchmarks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

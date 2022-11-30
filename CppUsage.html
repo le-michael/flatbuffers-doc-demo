@@ -1,0 +1,700 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>C++ Usage - Flatbuffers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="FlatBuffers.html"><strong aria-hidden="true">1.</strong> Flatbuffers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Internals.html"><strong aria-hidden="true">1.1.</strong> Flatbuffers internals</a></li></ol></li><li class="chapter-item expanded "><a href="Schemas.html"><strong aria-hidden="true">2.</strong> Writing a schema</a></li><li class="chapter-item expanded "><a href="Compiler.html"><strong aria-hidden="true">3.</strong> flatc CLI</a></li><li class="chapter-item expanded "><a href="FlexBuffers.html"><strong aria-hidden="true">4.</strong> Flexbuffers</a></li><li class="chapter-item expanded "><a href="Benchmarks.html"><strong aria-hidden="true">5.</strong> Benchmarks</a></li><li class="chapter-item expanded "><a href="Support.html"><strong aria-hidden="true">6.</strong> Language Support</a></li><li class="chapter-item expanded "><a href="Tutorial.html"><strong aria-hidden="true">7.</strong> Tutorial</a></li><li class="chapter-item expanded "><a href="WhitePaper.html"><strong aria-hidden="true">8.</strong> White Paper</a></li><li class="chapter-item expanded affix "><li class="part-title">Guides</li><li class="chapter-item expanded "><a href="CppUsage.html" class="active"><strong aria-hidden="true">9.</strong> C++ Usage</a></li><li class="chapter-item expanded "><a href="CsharpUsage.html"><strong aria-hidden="true">10.</strong> C# Usage</a></li><li class="chapter-item expanded "><a href="CUsage.html"><strong aria-hidden="true">11.</strong> C Usage</a></li><li class="chapter-item expanded "><a href="DartUsage.html"><strong aria-hidden="true">12.</strong> Dart Usage</a></li><li class="chapter-item expanded "><a href="GoUsage.html"><strong aria-hidden="true">13.</strong> Go Usage</a></li><li class="chapter-item expanded "><a href="JavaScriptUsage.html"><strong aria-hidden="true">14.</strong> JavaScript Usage</a></li><li class="chapter-item expanded "><a href="JavaUsage.html"><strong aria-hidden="true">15.</strong> Java Usage</a></li><li class="chapter-item expanded "><a href="KotlinUsage.html"><strong aria-hidden="true">16.</strong> Kotlin Usage</a></li><li class="chapter-item expanded "><a href="LobsterUsage.html"><strong aria-hidden="true">17.</strong> Lobster Usage</a></li><li class="chapter-item expanded "><a href="LuaUsage.html"><strong aria-hidden="true">18.</strong> Lua Usage</a></li><li class="chapter-item expanded "><a href="PHPUsage.html"><strong aria-hidden="true">19.</strong> PHP Usage</a></li><li class="chapter-item expanded "><a href="PythonUsage.html"><strong aria-hidden="true">20.</strong> Python Usage</a></li><li class="chapter-item expanded "><a href="RustUsage.html"><strong aria-hidden="true">21.</strong> Rust Usage</a></li><li class="chapter-item expanded "><a href="SwiftUsage.html"><strong aria-hidden="true">22.</strong> Swift Usage</a></li><li class="chapter-item expanded "><a href="TypeScriptUsage.html"><strong aria-hidden="true">23.</strong> TypeScript Usage</a></li><li class="chapter-item expanded affix "><li class="part-title">Contributing</li><li class="chapter-item expanded "><a href="Building.html"><strong aria-hidden="true">24.</strong> Building</a></li><li class="chapter-item expanded "><a href="Grammar.html"><strong aria-hidden="true">25.</strong> Schema Grammar</a></li><li class="chapter-item expanded "><a href="IntermediateRepresentation.html"><strong aria-hidden="true">26.</strong> Intermediate Representation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Flatbuffers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="use-in-c----flatbuffers_guide_use_cpp"><a class="header" href="#use-in-c----flatbuffers_guide_use_cpp">Use in C++    {#flatbuffers_guide_use_cpp}</a></h1>
+<h2 id="before-you-get-started"><a class="header" href="#before-you-get-started">Before you get started</a></h2>
+<p>Before diving into the FlatBuffers usage in C++, it should be noted that
+the [Tutorial](@ref flatbuffers_guide_tutorial) page has a complete guide
+to general FlatBuffers usage in all of the supported languages (including C++).
+This page is designed to cover the nuances of FlatBuffers usage, specific to
+C++.</p>
+<h4 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h4>
+<p>This page assumes you have written a FlatBuffers schema and compiled it
+with the Schema Compiler. If you have not, please see
+[Using the schema compiler](@ref flatbuffers_guide_using_schema_compiler)
+and [Writing a schema](@ref flatbuffers_guide_writing_schema).</p>
+<p>Assuming you wrote a schema, say <code>mygame.fbs</code> (though the extension doesn't
+matter), you've generated a C++ header called <code>mygame_generated.h</code> using the
+compiler (e.g. <code>flatc -c mygame.fbs</code>), you can now start using this in
+your program by including the header. As noted, this header relies on
+<code>flatbuffers/flatbuffers.h</code>, which should be in your include path.</p>
+<h2 id="flatbuffers-c-library-code-location"><a class="header" href="#flatbuffers-c-library-code-location">FlatBuffers C++ library code location</a></h2>
+<p>The code for the FlatBuffers C++ library can be found at
+<code>flatbuffers/include/flatbuffers</code>. You can browse the library code on the
+<a href="https://github.com/google/flatbuffers/tree/master/include/flatbuffers">FlatBuffers GitHub page</a>.</p>
+<h2 id="testing-the-flatbuffers-c-library"><a class="header" href="#testing-the-flatbuffers-c-library">Testing the FlatBuffers C++ library</a></h2>
+<p>The code to test the C++ library can be found at <code>flatbuffers/tests</code>.
+The test code itself is located in
+<a href="https://github.com/google/flatbuffers/blob/master/tests/test.cpp">test.cpp</a>.</p>
+<p>This test file is built alongside <code>flatc</code>. To review how to build the project,
+please read the [Building](@ref flatbuffers_guide_building) documentation.</p>
+<p>To run the tests, execute <code>flattests</code> from the root <code>flatbuffers/</code> directory.
+For example, on <a href="https://en.wikipedia.org/wiki/Linux">Linux</a>, you would simply
+run: <code>./flattests</code>.</p>
+<h2 id="using-the-flatbuffers-c-library"><a class="header" href="#using-the-flatbuffers-c-library">Using the FlatBuffers C++ library</a></h2>
+<p><em>Note: See [Tutorial](@ref flatbuffers_guide_tutorial) for a more in-depth
+example of how to use FlatBuffers in C++.</em></p>
+<p>FlatBuffers supports both reading and writing FlatBuffers in C++.</p>
+<p>To use FlatBuffers in your code, first generate the C++ classes from your
+schema with the <code>--cpp</code> option to <code>flatc</code>. Then you can include both FlatBuffers
+and the generated code to read or write FlatBuffers.</p>
+<p>For example, here is how you would read a FlatBuffer binary file in C++:
+First, include the library and generated code. Then read the file into
+a <code>char *</code> array, which you pass to <code>GetMonster()</code>.</p>
+<pre><code class="language-cpp">    #include &quot;flatbuffers/flatbuffers.h&quot;
+    #include &quot;monster_test_generate.h&quot;
+    #include &lt;iostream&gt; // C++ header file for printing
+    #include &lt;fstream&gt; // C++ header file for file access
+
+
+    std::ifstream infile;
+    infile.open(&quot;monsterdata_test.mon&quot;, std::ios::binary | std::ios::in);
+    infile.seekg(0,std::ios::end);
+    int length = infile.tellg();
+    infile.seekg(0,std::ios::beg);
+    char *data = new char[length];
+    infile.read(data, length);
+    infile.close();
+
+    auto monster = GetMonster(data);
+</code></pre>
+<p><code>monster</code> is of type <code>Monster *</code>, and points to somewhere <em>inside</em> your
+buffer (root object pointers are not the same as <code>buffer_pointer</code> !).
+If you look in your generated header, you'll see it has
+convenient accessors for all fields, e.g. <code>hp()</code>, <code>mana()</code>, etc:</p>
+<pre><code class="language-cpp">    std::cout &lt;&lt; &quot;hp : &quot; &lt;&lt; monster-&gt;hp() &lt;&lt; std::endl;              // '80'
+    std::cout &lt;&lt; &quot;mana : &quot; &lt;&lt; monster-&gt;mana() &lt;&lt; std::endl;          // default value of '150'
+    std::cout &lt;&lt; &quot;name : &quot; &lt;&lt; monster-&gt;name()-&gt;c_str() &lt;&lt; std::endl; // &quot;MyMonster&quot;
+</code></pre>
+<p><em>Note: That we never stored a <code>mana</code> value, so it will return the default.</em></p>
+<p>The following attributes are supported:</p>
+<ul>
+<li>
+<p><code>shared</code> (on a field): For string fields, this enables the usage of string
+pooling (i.e. <code>CreateSharedString</code>) as default serialization behavior.</p>
+<p>Specifically, <code>CreateXxxDirect</code> functions and <code>Pack</code> functions for object
+based API (see below) will use <code>CreateSharedString</code> to create strings.</p>
+</li>
+</ul>
+<h2 id="object-based-api--flatbuffers_cpp_object_based_api"><a class="header" href="#object-based-api--flatbuffers_cpp_object_based_api">Object based API  {#flatbuffers_cpp_object_based_api}</a></h2>
+<p>FlatBuffers is all about memory efficiency, which is why its base API is written
+around using as little as possible of it. This does make the API clumsier
+(requiring pre-order construction of all data, and making mutation harder).</p>
+<p>For times when efficiency is less important a more convenient object based API
+can be used (through <code>--gen-object-api</code>) that is able to unpack &amp; pack a
+FlatBuffer into objects and standard STL containers, allowing for convenient
+construction, access and mutation.</p>
+<p>To use:</p>
+<pre><code class="language-cpp">    // Autogenerated class from table Monster.
+    MonsterT monsterobj;
+
+    // Deserialize from buffer into object.
+    GetMonster(flatbuffer)-&gt;UnPackTo(&amp;monsterobj);
+
+    // Update object directly like a C++ class instance.
+    cout &lt;&lt; monsterobj.name;  // This is now a std::string!
+    monsterobj.name = &quot;Bob&quot;;  // Change the name.
+
+    // Serialize into new flatbuffer.
+    FlatBufferBuilder fbb;
+    fbb.Finish(Monster::Pack(fbb, &amp;monsterobj));
+</code></pre>
+<p>The following attributes are specific to the object-based API code generation:</p>
+<ul>
+<li>
+<p><code>native_inline</code> (on a field): Because FlatBuffer tables and structs are
+optionally present in a given buffer, they are best represented as pointers
+(specifically std::unique_ptrs) in the native class since they can be null.
+This attribute changes the member declaration to use the type directly
+rather than wrapped in a unique_ptr.</p>
+</li>
+<li>
+<p><code>native_default(&quot;value&quot;)</code> (on a field): For members that are declared
+&quot;native_inline&quot;, the value specified with this attribute will be included
+verbatim in the class constructor initializer list for this member.</p>
+</li>
+<li>
+<p><code>native_custom_alloc(&quot;custom_allocator&quot;)</code> (on a table or struct): When using the
+object-based API all generated NativeTables that  are allocated when unpacking
+your  flatbuffer will use &quot;custom allocator&quot;. The allocator is also used by
+any std::vector that appears in a table defined with <code>native_custom_alloc</code>.
+This can be  used to provide allocation from a pool for example, for faster
+unpacking when using the object-based API.</p>
+</li>
+</ul>
+<p>Minimal Example:</p>
+<p>schema:</p>
+<pre><code class="language-cpp">    table mytable(native_custom_alloc:&quot;custom_allocator&quot;) {
+      ...
+    }
+</code></pre>
+<p>with <code>custom_allocator</code> defined before <code>flatbuffers.h</code> is included, as:</p>
+<pre><code class="language-cpp">    template &lt;typename T&gt; struct custom_allocator : public std::allocator&lt;T&gt; {
+
+      typedef T *pointer;
+
+      template &lt;class U&gt;
+      struct rebind {
+        typedef custom_allocator&lt;U&gt; other;
+      };
+
+      pointer allocate(const std::size_t n) {
+        return std::allocator&lt;T&gt;::allocate(n);
+      }
+
+      void deallocate(T* ptr, std::size_t n) {
+        return std::allocator&lt;T&gt;::deallocate(ptr,n);
+      }
+
+      custom_allocator() throw() {}
+
+      template &lt;class U&gt;
+      custom_allocator(const custom_allocator&lt;U&gt;&amp;) throw() {}
+    };
+</code></pre>
+<ul>
+<li><code>native_type(&quot;type&quot;)</code> (on a struct): In some cases, a more optimal C++ data
+type exists for a given struct.  For example, the following schema:</li>
+</ul>
+<pre><code class="language-cpp">    struct Vec2 {
+      x: float;
+      y: float;
+    }
+</code></pre>
+<p>generates the following Object-Based API class:</p>
+<pre><code class="language-cpp">    struct Vec2T : flatbuffers::NativeTable {
+      float x;
+      float y;
+    };
+</code></pre>
+<p>However, it can be useful to instead use a user-defined C++ type since it
+can provide more functionality, eg.</p>
+<pre><code class="language-cpp">    struct vector2 {
+      float x = 0, y = 0;
+      vector2 operator+(vector2 rhs) const { ... }
+      vector2 operator-(vector2 rhs) const { ... }
+      float length() const { ... }
+      // etc.
+    };
+</code></pre>
+<p>The <code>native_type</code> attribute will replace the usage of the generated class
+with the given type.  So, continuing with the example, the generated
+code would use <code>vector2</code> in place of <code>Vec2T</code> for all generated code of
+the Object-Based API.</p>
+<p>However, because the <code>native_type</code> is unknown to flatbuffers, the user must
+provide the following functions to aide in the serialization process:</p>
+<pre><code class="language-cpp">    namespace flatbuffers {
+      Vec2 Pack(const vector2&amp; obj);
+      vector2 UnPack(const Vec2&amp; obj);
+    }
+</code></pre>
+<ul>
+<li><code>native_type_pack_name(&quot;name&quot;)</code> (on a struct when <code>native_type</code> is
+specified, too): when you want to use the same <code>native_type</code> multiple times
+(e. g. with different precision) you must make the names of the Pack/UnPack
+functions unique, otherwise you will run into compile errors. This attribute
+appends a name to the expected Pack/UnPack functions. So when you
+specify <code>native_type_pack_name(&quot;Vec2&quot;)</code> in the above example you now need to
+implement these serialization functions instead:</li>
+</ul>
+<pre><code class="language-cpp">    namespace flatbuffers {
+      Vec2 PackVec2(const vector2&amp; obj);
+      vector2 UnPackVec2(const Vec2&amp; obj);
+    }
+</code></pre>
+<p>Finally, the following top-level attributes:</p>
+<ul>
+<li>
+<p><code>native_include(&quot;path&quot;)</code> (at file level): Because the <code>native_type</code> attribute
+can be used to introduce types that are unknown to flatbuffers, it may be
+necessary to include &quot;external&quot; header files in the generated code.  This
+attribute can be used to directly add an #include directive to the top of
+the generated code that includes the specified path directly.</p>
+</li>
+<li>
+<p><code>force_align</code>: this attribute may not be respected in the object API,
+depending on the aligned of the allocator used with <code>new</code>.</p>
+</li>
+</ul>
+<h1 id="external-references"><a class="header" href="#external-references">External references</a></h1>
+<p>An additional feature of the object API is the ability to allow you to load
+multiple independent FlatBuffers, and have them refer to eachothers objects
+using hashes which are then represented as typed pointers in the object API.</p>
+<p>To make this work have a field in the objects you want to referred to which is
+using the string hashing feature (see <code>hash</code> attribute in the
+[schema](@ref flatbuffers_guide_writing_schema) documentation). Then you have
+a similar hash in the field referring to it, along with a <code>cpp_type</code>
+attribute specifying the C++ type this will refer to (this can be any C++
+type, and will get a <code>*</code> added).</p>
+<p>Then, in JSON or however you create these buffers, make sure they use the
+same string (or hash).</p>
+<p>When you call <code>UnPack</code> (or <code>Create</code>), you'll need a function that maps from
+hash to the object (see <code>resolver_function_t</code> for details).</p>
+<h1 id="using-different-pointer-types"><a class="header" href="#using-different-pointer-types">Using different pointer types</a></h1>
+<p>By default the object tree is built out of <code>std::unique_ptr</code>, but you can
+influence this either globally (using the <code>--cpp-ptr-type</code> argument to
+<code>flatc</code>) or per field (using the <code>cpp_ptr_type</code> attribute) to by any smart
+pointer type (<code>my_ptr&lt;T&gt;</code>), or by specifying <code>naked</code> as the type to get <code>T *</code>
+pointers. Unlike the smart pointers, naked pointers do not manage memory for
+you, so you'll have to manage their lifecycles manually.  To reference the
+pointer type specified by the <code>--cpp-ptr-type</code> argument to <code>flatc</code> from a
+flatbuffer field set the <code>cpp_ptr_type</code> attribute to <code>default_ptr_type</code>.</p>
+<h1 id="using-different-string-type"><a class="header" href="#using-different-string-type">Using different string type</a></h1>
+<p>By default the object tree is built out of <code>std::string</code>, but you can
+influence this either globally (using the <code>--cpp-str-type</code> argument to
+<code>flatc</code>) or per field using the <code>cpp_str_type</code> attribute.</p>
+<p>The type must support <code>T::c_str()</code>, <code>T::length()</code> and <code>T::empty()</code> as member functions.</p>
+<p>Further, the type must be constructible from std::string, as by default a
+std::string instance is constructed and then used to initialize the custom
+string type. This behavior impedes efficient and zero-copy construction of
+custom string types; the <code>--cpp-str-flex-ctor</code> argument to <code>flatc</code> or the
+per field attribute <code>cpp_str_flex_ctor</code> can be used to change this behavior,
+so that the custom string type is constructed by passing the pointer and
+length of the FlatBuffers String. The custom string class will require a
+constructor in the following format: <code>custom_str_class(const char *, size_t)</code>.
+Please note that the character array is not guaranteed to be NULL terminated,
+you should always use the provided size to determine end of string.</p>
+<h2 id="reflection--resizing"><a class="header" href="#reflection--resizing">Reflection (&amp; Resizing)</a></h2>
+<p>There is experimental support for reflection in FlatBuffers, allowing you to
+read and write data even if you don't know the exact format of a buffer, and
+even allows you to change sizes of strings and vectors in-place.</p>
+<p>The way this works is very elegant; there is actually a FlatBuffer schema that
+describes schemas (!) which you can find in <code>reflection/reflection.fbs</code>.
+The compiler, <code>flatc</code>, can write out any schemas it has just parsed as a binary
+FlatBuffer, corresponding to this meta-schema.</p>
+<p>Loading in one of these binary schemas at runtime allows you traverse any
+FlatBuffer data that corresponds to it without knowing the exact format. You
+can query what fields are present, and then read/write them after.</p>
+<p>For convenient field manipulation, you can include the header
+<code>flatbuffers/reflection.h</code> which includes both the generated code from the meta
+schema, as well as a lot of helper functions.</p>
+<p>And example of usage, for the time being, can be found in
+<code>test.cpp/ReflectionTest()</code>.</p>
+<h2 id="mini-reflection"><a class="header" href="#mini-reflection">Mini Reflection</a></h2>
+<p>A more limited form of reflection is available for direct inclusion in
+generated code, which doesn't do any (binary) schema access at all. It was designed
+to keep the overhead of reflection as low as possible (on the order of 2-6
+bytes per field added to your executable), but doesn't contain all the
+information the (binary) schema contains.</p>
+<p>You add this information to your generated code by specifying <code>--reflect-types</code>
+(or instead <code>--reflect-names</code> if you also want field / enum names).</p>
+<p>You can now use this information, for example to print a FlatBuffer to text:</p>
+<pre><code>auto s = flatbuffers::FlatBufferToString(flatbuf, MonsterTypeTable());
+</code></pre>
+<p><code>MonsterTypeTable()</code> is declared in the generated code for each type. The
+string produced is very similar to the JSON produced by the <code>Parser</code> based
+text generator.</p>
+<p>You'll need <code>flatbuffers/minireflect.h</code> for this functionality. In there is also
+a convenient visitor/iterator so you can write your own output / functionality
+based on the mini reflection tables without having to know the FlatBuffers or
+reflection encoding.</p>
+<h2 id="storing-maps--dictionaries-in-a-flatbuffer"><a class="header" href="#storing-maps--dictionaries-in-a-flatbuffer">Storing maps / dictionaries in a FlatBuffer</a></h2>
+<p>FlatBuffers doesn't support maps natively, but there is support to
+emulate their behavior with vectors and binary search, which means you
+can have fast lookups directly from a FlatBuffer without having to unpack
+your data into a <code>std::map</code> or similar.</p>
+<p>To use it:</p>
+<ul>
+<li>Designate one of the fields in a table as they &quot;key&quot; field. You do this
+by setting the <code>key</code> attribute on this field, e.g.
+<code>name:string (key)</code>.
+You may only have one key field, and it must be of string or scalar type.</li>
+<li>Write out tables of this type as usual, collect their offsets in an
+array or vector.</li>
+<li>Instead of <code>CreateVector</code>, call <code>CreateVectorOfSortedTables</code>,
+which will first sort all offsets such that the tables they refer to
+are sorted by the key field, then serialize it.</li>
+<li>Now when you're accessing the FlatBuffer, you can use <code>Vector::LookupByKey</code>
+instead of just <code>Vector::Get</code> to access elements of the vector, e.g.:
+<code>myvector-&gt;LookupByKey(&quot;Fred&quot;)</code>, which returns a pointer to the
+corresponding table type, or <code>nullptr</code> if not found.
+<code>LookupByKey</code> performs a binary search, so should have a similar speed to
+<code>std::map</code>, though may be faster because of better caching. <code>LookupByKey</code>
+only works if the vector has been sorted, it will likely not find elements
+if it hasn't been sorted.</li>
+</ul>
+<h2 id="direct-memory-access"><a class="header" href="#direct-memory-access">Direct memory access</a></h2>
+<p>As you can see from the above examples, all elements in a buffer are
+accessed through generated accessors. This is because everything is
+stored in little endian format on all platforms (the accessor
+performs a swap operation on big endian machines), and also because
+the layout of things is generally not known to the user.</p>
+<p>For structs, layout is deterministic and guaranteed to be the same
+across platforms (scalars are aligned to their
+own size, and structs themselves to their largest member), and you
+are allowed to access this memory directly by using <code>sizeof()</code> and
+<code>memcpy</code> on the pointer to a struct, or even an array of structs.</p>
+<p>To compute offsets to sub-elements of a struct, make sure they
+are a structs themselves, as then you can use the pointers to
+figure out the offset without having to hardcode it. This is
+handy for use of arrays of structs with calls like <code>glVertexAttribPointer</code>
+in OpenGL or similar APIs.</p>
+<p>It is important to note is that structs are still little endian on all
+machines, so only use tricks like this if you can guarantee you're not
+shipping on a big endian machine (an <code>assert(FLATBUFFERS_LITTLEENDIAN)</code>
+would be wise).</p>
+<h2 id="access-of-untrusted-buffers"><a class="header" href="#access-of-untrusted-buffers">Access of untrusted buffers</a></h2>
+<p>The generated accessor functions access fields over offsets, which is
+very quick. These offsets are not verified at run-time, so a malformed
+buffer could cause a program to crash by accessing random memory.</p>
+<p>When you're processing large amounts of data from a source you know (e.g.
+your own generated data on disk), this is acceptable, but when reading
+data from the network that can potentially have been modified by an
+attacker, this is undesirable.</p>
+<p>For this reason, you can optionally use a buffer verifier before you
+access the data. This verifier will check all offsets, all sizes of
+fields, and null termination of strings to ensure that when a buffer
+is accessed, all reads will end up inside the buffer.</p>
+<p>Each root type will have a verification function generated for it,
+e.g. for <code>Monster</code>, you can call:</p>
+<pre><code class="language-cpp">	bool ok = VerifyMonsterBuffer(Verifier(buf, len));
+</code></pre>
+<p>if <code>ok</code> is true, the buffer is safe to read.</p>
+<p>Besides untrusted data, this function may be useful to call in debug
+mode, as extra insurance against data being corrupted somewhere along
+the way.</p>
+<p>While verifying a buffer isn't &quot;free&quot;, it is typically faster than
+a full traversal (since any scalar data is not actually touched),
+and since it may cause the buffer to be brought into cache before
+reading, the actual overhead may be even lower than expected.</p>
+<p>In specialized cases where a denial of service attack is possible,
+the verifier has two additional constructor arguments that allow
+you to limit the nesting depth and total amount of tables the
+verifier may encounter before declaring the buffer malformed. The default is
+<code>Verifier(buf, len, 64 /* max depth */, 1000000, /* max tables */)</code> which
+should be sufficient for most uses.</p>
+<h2 id="text--schema-parsing"><a class="header" href="#text--schema-parsing">Text &amp; schema parsing</a></h2>
+<p>Using binary buffers with the generated header provides a super low
+overhead use of FlatBuffer data. There are, however, times when you want
+to use text formats, for example because it interacts better with source
+control, or you want to give your users easy access to data.</p>
+<p>Another reason might be that you already have a lot of data in JSON
+format, or a tool that generates JSON, and if you can write a schema for
+it, this will provide you an easy way to use that data directly.</p>
+<p>(see the schema documentation for some specifics on the JSON format
+accepted).</p>
+<p>Schema evolution compatibility for the JSON format follows the same rules as the binary format (JSON formatted data will be forwards/backwards compatible with schemas that evolve in a compatible way).</p>
+<p>There are two ways to use text formats:</p>
+<h4 id="using-the-compiler-as-a-conversion-tool"><a class="header" href="#using-the-compiler-as-a-conversion-tool">Using the compiler as a conversion tool</a></h4>
+<p>This is the preferred path, as it doesn't require you to add any new
+code to your program, and is maximally efficient since you can ship with
+binary data. The disadvantage is that it is an extra step for your
+users/developers to perform, though you might be able to automate it.</p>
+<pre><code>flatc -b myschema.fbs mydata.json
+</code></pre>
+<p>This will generate the binary file <code>mydata_wire.bin</code> which can be loaded
+as before.</p>
+<h4 id="making-your-program-capable-of-loading-text-directly"><a class="header" href="#making-your-program-capable-of-loading-text-directly">Making your program capable of loading text directly</a></h4>
+<p>This gives you maximum flexibility. You could even opt to support both,
+i.e. check for both files, and regenerate the binary from text when
+required, otherwise just load the binary.</p>
+<p>This option is currently only available for C++, or Java through JNI.</p>
+<p>As mentioned in the section &quot;Building&quot; above, this technique requires
+you to link a few more files into your program, and you'll want to include
+<code>flatbuffers/idl.h</code>.</p>
+<p>Load text (either a schema or json) into an in-memory buffer (there is a
+convenient <code>LoadFile()</code> utility function in <code>flatbuffers/util.h</code> if you
+wish). Construct a parser:</p>
+<pre><code class="language-cpp">    flatbuffers::Parser parser;
+</code></pre>
+<p>Now you can parse any number of text files in sequence:</p>
+<pre><code class="language-cpp">    parser.Parse(text_file.c_str());
+</code></pre>
+<p>This works similarly to how the command-line compiler works: a sequence
+of files parsed by the same <code>Parser</code> object allow later files to
+reference definitions in earlier files. Typically this means you first
+load a schema file (which populates <code>Parser</code> with definitions), followed
+by one or more JSON files.</p>
+<p>As optional argument to <code>Parse</code>, you may specify a null-terminated list of
+include paths. If not specified, any include statements try to resolve from
+the current directory.</p>
+<p>If there were any parsing errors, <code>Parse</code> will return <code>false</code>, and
+<code>Parser::error_</code> contains a human readable error string with a line number
+etc, which you should present to the creator of that file.</p>
+<p>After each JSON file, the <code>Parser::fbb</code> member variable is the
+<code>FlatBufferBuilder</code> that contains the binary buffer version of that
+file, that you can access as described above.</p>
+<p><code>samples/sample_text.cpp</code> is a code sample showing the above operations.</p>
+<h2 id="threading"><a class="header" href="#threading">Threading</a></h2>
+<p>Reading a FlatBuffer does not touch any memory outside the original buffer,
+and is entirely read-only (all const), so is safe to access from multiple
+threads even without synchronisation primitives.</p>
+<p>Creating a FlatBuffer is not thread safe. All state related to building
+a FlatBuffer is contained in a FlatBufferBuilder instance, and no memory
+outside of it is touched. To make this thread safe, either do not
+share instances of FlatBufferBuilder between threads (recommended), or
+manually wrap it in synchronisation primitives. There's no automatic way to
+accomplish this, by design, as we feel multithreaded construction
+of a single buffer will be rare, and synchronisation overhead would be costly.</p>
+<h2 id="advanced-union-features"><a class="header" href="#advanced-union-features">Advanced union features</a></h2>
+<p>The C++ implementation currently supports vectors of unions (i.e. you can
+declare a field as <code>[T]</code> where <code>T</code> is a union type instead of a table type). It
+also supports structs and strings in unions, besides tables.</p>
+<p>For an example of these features, see <code>tests/union_vector</code>, and
+<code>UnionVectorTest</code> in <code>test.cpp</code>.</p>
+<p>Since these features haven't been ported to other languages yet, if you
+choose to use them, you won't be able to use these buffers in other languages
+(<code>flatc</code> will refuse to compile a schema that uses these features).</p>
+<p>These features reduce the amount of &quot;table wrapping&quot; that was previously
+needed to use unions.</p>
+<p>To use scalars, simply wrap them in a struct.</p>
+<h2 id="depth-limit-of-nested-objects-and-stack-overflow-control"><a class="header" href="#depth-limit-of-nested-objects-and-stack-overflow-control">Depth limit of nested objects and stack-overflow control</a></h2>
+<p>The parser of Flatbuffers schema or json-files is kind of recursive parser.
+To avoid stack-overflow problem the parser has a built-in limiter of
+recursion depth. Number of nested declarations in a schema or number of
+nested json-objects is limited. By default, this depth limit set to <code>64</code>.
+It is possible to override this limit with <code>FLATBUFFERS_MAX_PARSING_DEPTH</code>
+definition. This definition can be helpful for testing purposes or embedded
+applications. For details see [build](@ref flatbuffers_guide_building) of
+CMake-based projects.</p>
+<h2 id="dependence-from-c-locale-flatbuffers_locale_cpp"><a class="header" href="#dependence-from-c-locale-flatbuffers_locale_cpp">Dependence from C-locale {#flatbuffers_locale_cpp}</a></h2>
+<p>The Flatbuffers [grammar](@ref flatbuffers grammar) uses ASCII
+character set for identifiers, alphanumeric literals, reserved words.</p>
+<p>Internal implementation of the Flatbuffers depends from functions which
+depend from C-locale: <code>strtod()</code> or <code>strtof()</code>, for example.
+The library expects the dot <code>.</code> symbol as the separator of an integer
+part from the fractional part of a float number.
+Another separator symbols (<code>,</code> for example) will break the compatibility
+and may lead to an error while parsing a Flatbuffers schema or a json file.</p>
+<p>The Standard C locale is a global resource, there is only one locale for
+the entire application. Some modern compilers and platforms have
+locale-independent or locale-narrow functions <code>strtof_l</code>, <code>strtod_l</code>,
+<code>strtoll_l</code>, <code>strtoull_l</code> to resolve this dependency.
+These functions use specified locale rather than the global or per-thread
+locale instead. They are part of POSIX-2008 but not part of the C/C++
+standard library, therefore, may be missing on some platforms.
+The Flatbuffers library try to detect these functions at configuration and
+compile time:</p>
+<ul>
+<li>CMake <code>&quot;CMakeLists.txt&quot;</code>:
+<ul>
+<li>Check existence of <code>strtol_l</code> and <code>strtod_l</code> in the <code>&lt;stdlib.h&gt;</code>.</li>
+</ul>
+</li>
+<li>Compile-time <code>&quot;/include/base.h&quot;</code>:
+<ul>
+<li><code>_MSC_VER &gt;= 1900</code>: MSVC2012 or higher if build with MSVC.</li>
+<li><code>_XOPEN_SOURCE&gt;=700</code>: POSIX-2008 if build with GCC/Clang.</li>
+</ul>
+</li>
+</ul>
+<p>After detection, the definition <code>FLATBUFFERS_LOCALE_INDEPENDENT</code> will be
+set to <code>0</code> or <code>1</code>.
+To override or stop this detection use CMake <code>-DFLATBUFFERS_LOCALE_INDEPENDENT={0|1}</code>
+or predefine <code>FLATBUFFERS_LOCALE_INDEPENDENT</code> symbol.</p>
+<p>To test the compatibility of the Flatbuffers library with
+a specific locale use the environment variable <code>FLATBUFFERS_TEST_LOCALE</code>:</p>
+<pre><code class="language-sh">&gt;FLATBUFFERS_TEST_LOCALE=&quot;&quot; ./flattests
+&gt;FLATBUFFERS_TEST_LOCALE=&quot;ru_RU.CP1251&quot; ./flattests
+</code></pre>
+<h2 id="support-of-floating-point-numbers"><a class="header" href="#support-of-floating-point-numbers">Support of floating-point numbers</a></h2>
+<p>The Flatbuffers library assumes that a C++ compiler and a CPU are
+compatible with the <code>IEEE-754</code> floating-point standard.
+The schema and json parser may fail if <code>fast-math</code> or <code>/fp:fast</code> mode is active.</p>
+<h3 id="support-of-hexadecimal-and-special-floating-point-numbers"><a class="header" href="#support-of-hexadecimal-and-special-floating-point-numbers">Support of hexadecimal and special floating-point numbers</a></h3>
+<p>According to the [grammar](@ref flatbuffers_grammar) <code>fbs</code> and <code>json</code> files
+may use hexadecimal and special (<code>NaN</code>, <code>Inf</code>) floating-point literals.
+The Flatbuffers uses <code>strtof</code> and <code>strtod</code> functions to parse floating-point
+literals. The Flatbuffers library has a code to detect a compiler compatibility
+with the literals. If necessary conditions are met the preprocessor constant
+<code>FLATBUFFERS_HAS_NEW_STRTOD</code> will be set to <code>1</code>.
+The support of floating-point literals will be limited at compile time
+if <code>FLATBUFFERS_HAS_NEW_STRTOD</code> constant is less than <code>1</code>.
+In this case, schemas with hexadecimal or special literals cannot be used.</p>
+<h3 id="comparison-of-floating-point-nan-values"><a class="header" href="#comparison-of-floating-point-nan-values">Comparison of floating-point NaN values</a></h3>
+<p>The floating-point <code>NaN</code> (<code>not a number</code>) is special value which
+representing an undefined or unrepresentable value.
+<code>NaN</code> may be explicitly assigned to variables, typically as a representation
+for missing values or may be a result of a mathematical operation.
+The <code>IEEE-754</code> defines two kind of <code>NaNs</code>:</p>
+<ul>
+<li>Quiet NaNs, or <code>qNaNs</code>.</li>
+<li>Signaling NaNs, or <code>sNaNs</code>.</li>
+</ul>
+<p>According to the <code>IEEE-754</code>, a comparison with <code>NaN</code> always returns
+an unordered result even when compared with itself. As a result, a whole
+Flatbuffers object will be not equal to itself if has one or more <code>NaN</code>.
+Flatbuffers scalar fields that have the default value are not actually stored
+in the serialized data but are generated in code (see [Writing a schema](@ref flatbuffers_guide_writing_schema)).
+Scalar fields with <code>NaN</code> defaults break this behavior.
+If a schema has a lot of <code>NaN</code> defaults the Flatbuffers can override
+the unordered comparison by the ordered: <code>(NaN==NaN)-&gt;true</code>.
+This ordered comparison is enabled when compiling a program with the symbol
+<code>FLATBUFFERS_NAN_DEFAULTS</code> defined.
+Additional computations added by <code>FLATBUFFERS_NAN_DEFAULTS</code> are very cheap
+if GCC or Clang used. These compilers have a compile-time implementation
+of <code>isnan</code> checking which MSVC does not.</p>
+<br>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="WhitePaper.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="CsharpUsage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="WhitePaper.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="CsharpUsage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

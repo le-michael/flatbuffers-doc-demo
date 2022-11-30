@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust Usage - Flatbuffers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="FlatBuffers.html"><strong aria-hidden="true">1.</strong> Flatbuffers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Internals.html"><strong aria-hidden="true">1.1.</strong> Flatbuffers internals</a></li></ol></li><li class="chapter-item expanded "><a href="Schemas.html"><strong aria-hidden="true">2.</strong> Writing a schema</a></li><li class="chapter-item expanded "><a href="Compiler.html"><strong aria-hidden="true">3.</strong> flatc CLI</a></li><li class="chapter-item expanded "><a href="FlexBuffers.html"><strong aria-hidden="true">4.</strong> Flexbuffers</a></li><li class="chapter-item expanded "><a href="Benchmarks.html"><strong aria-hidden="true">5.</strong> Benchmarks</a></li><li class="chapter-item expanded "><a href="Support.html"><strong aria-hidden="true">6.</strong> Language Support</a></li><li class="chapter-item expanded "><a href="Tutorial.html"><strong aria-hidden="true">7.</strong> Tutorial</a></li><li class="chapter-item expanded "><a href="WhitePaper.html"><strong aria-hidden="true">8.</strong> White Paper</a></li><li class="chapter-item expanded affix "><li class="part-title">Guides</li><li class="chapter-item expanded "><a href="CppUsage.html"><strong aria-hidden="true">9.</strong> C++ Usage</a></li><li class="chapter-item expanded "><a href="CsharpUsage.html"><strong aria-hidden="true">10.</strong> C# Usage</a></li><li class="chapter-item expanded "><a href="CUsage.html"><strong aria-hidden="true">11.</strong> C Usage</a></li><li class="chapter-item expanded "><a href="DartUsage.html"><strong aria-hidden="true">12.</strong> Dart Usage</a></li><li class="chapter-item expanded "><a href="GoUsage.html"><strong aria-hidden="true">13.</strong> Go Usage</a></li><li class="chapter-item expanded "><a href="JavaScriptUsage.html"><strong aria-hidden="true">14.</strong> JavaScript Usage</a></li><li class="chapter-item expanded "><a href="JavaUsage.html"><strong aria-hidden="true">15.</strong> Java Usage</a></li><li class="chapter-item expanded "><a href="KotlinUsage.html"><strong aria-hidden="true">16.</strong> Kotlin Usage</a></li><li class="chapter-item expanded "><a href="LobsterUsage.html"><strong aria-hidden="true">17.</strong> Lobster Usage</a></li><li class="chapter-item expanded "><a href="LuaUsage.html"><strong aria-hidden="true">18.</strong> Lua Usage</a></li><li class="chapter-item expanded "><a href="PHPUsage.html"><strong aria-hidden="true">19.</strong> PHP Usage</a></li><li class="chapter-item expanded "><a href="PythonUsage.html"><strong aria-hidden="true">20.</strong> Python Usage</a></li><li class="chapter-item expanded "><a href="RustUsage.html" class="active"><strong aria-hidden="true">21.</strong> Rust Usage</a></li><li class="chapter-item expanded "><a href="SwiftUsage.html"><strong aria-hidden="true">22.</strong> Swift Usage</a></li><li class="chapter-item expanded "><a href="TypeScriptUsage.html"><strong aria-hidden="true">23.</strong> TypeScript Usage</a></li><li class="chapter-item expanded affix "><li class="part-title">Contributing</li><li class="chapter-item expanded "><a href="Building.html"><strong aria-hidden="true">24.</strong> Building</a></li><li class="chapter-item expanded "><a href="Grammar.html"><strong aria-hidden="true">25.</strong> Schema Grammar</a></li><li class="chapter-item expanded "><a href="IntermediateRepresentation.html"><strong aria-hidden="true">26.</strong> Intermediate Representation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Flatbuffers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="use-in-rust----flatbuffers_guide_use_rust"><a class="header" href="#use-in-rust----flatbuffers_guide_use_rust">Use in Rust    {#flatbuffers_guide_use_rust}</a></h1>
+<h2 id="before-you-get-started"><a class="header" href="#before-you-get-started">Before you get started</a></h2>
+<p>Before diving into the FlatBuffers usage in Rust, it should be noted that
+the [Tutorial](@ref flatbuffers_guide_tutorial) page has a complete guide
+to general FlatBuffers usage in all of the supported languages (including Rust).
+This page is designed to cover the nuances of FlatBuffers usage, specific to
+Rust.</p>
+<h4 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h4>
+<p>This page assumes you have written a FlatBuffers schema and compiled it
+with the Schema Compiler. If you have not, please see
+[Using the schema compiler](@ref flatbuffers_guide_using_schema_compiler)
+and [Writing a schema](@ref flatbuffers_guide_writing_schema).</p>
+<p>Assuming you wrote a schema, say <code>mygame.fbs</code> (though the extension doesn't
+matter), you've generated a Rust file called <code>mygame_generated.rs</code> using the
+compiler (e.g. <code>flatc --rust mygame.fbs</code> or via helpers listed in &quot;Useful
+tools created by others&quot; section bellow), you can now start using this in
+your program by including the file. As noted, this header relies on the crate
+<code>flatbuffers</code>, which should be in your include <code>Cargo.toml</code>.</p>
+<h2 id="flatbuffers-rust-library-code-location"><a class="header" href="#flatbuffers-rust-library-code-location">FlatBuffers Rust library code location</a></h2>
+<p>The code for the FlatBuffers Rust library can be found at
+<code>flatbuffers/rust</code>. You can browse the library code on the
+<a href="https://github.com/google/flatbuffers/tree/master/rust">FlatBuffers GitHub page</a>.</p>
+<h2 id="testing-the-flatbuffers-rust-library"><a class="header" href="#testing-the-flatbuffers-rust-library">Testing the FlatBuffers Rust library</a></h2>
+<p>The code to test the Rust library can be found at <code>flatbuffers/tests/rust_usage_test</code>.
+The test code itself is located in
+<a href="https://github.com/google/flatbuffers/blob/master/tests/rust_usage_test/tests/integration_test.rs">integration_test.rs</a></p>
+<p>This test file requires <code>flatc</code> to be present. To review how to build the project,
+please read the [Building](@ref flatbuffers_guide_building) documentation.</p>
+<p>To run the tests, execute <code>RustTest.sh</code> from the <code>flatbuffers/tests</code> directory.
+For example, on <a href="https://en.wikipedia.org/wiki/Linux">Linux</a>, you would simply
+run: <code>cd tests &amp;&amp; ./RustTest.sh</code>.</p>
+<p><em>Note: The shell script requires <a href="https://www.rust-lang.org">Rust</a> to
+be installed.</em></p>
+<h2 id="using-the-flatbuffers-rust-library"><a class="header" href="#using-the-flatbuffers-rust-library">Using the FlatBuffers Rust library</a></h2>
+<p><em>Note: See [Tutorial](@ref flatbuffers_guide_tutorial) for a more in-depth
+example of how to use FlatBuffers in Rust.</em></p>
+<p>FlatBuffers supports both reading and writing FlatBuffers in Rust.</p>
+<p>To use FlatBuffers in your code, first generate the Rust modules from your
+schema with the <code>--rust</code> option to <code>flatc</code>. Then you can import both FlatBuffers
+and the generated code to read or write FlatBuffers.</p>
+<p>For example, here is how you would read a FlatBuffer binary file in Rust:
+First, include the library and generated code. Then read the file into
+a <code>u8</code> vector, which you pass, as a byte slice, to <code>root_as_monster()</code>.</p>
+<p>This full example program is available in the Rust test suite:
+<a href="https://github.com/google/flatbuffers/blob/master/tests/rust_usage_test/bin/monster_example.rs">monster_example.rs</a></p>
+<p>It can be run by <code>cd</code>ing to the <code>rust_usage_test</code> directory and executing: <code>cargo run monster_example</code>.</p>
+<pre><code class="language-{.rs}">    extern crate flatbuffers;
+
+    #[allow(dead_code, unused_imports)]
+    #[path = &quot;../../monster_test_generated.rs&quot;]
+    mod monster_test_generated;
+    pub use monster_test_generated::my_game;
+
+    use std::io::Read;
+
+    fn main() {
+        let mut f = std::fs::File::open(&quot;../monsterdata_test.mon&quot;).unwrap();
+        let mut buf = Vec::new();
+        f.read_to_end(&amp;mut buf).expect(&quot;file reading failed&quot;);
+
+        let monster = my_game::example::root_as_monster(&amp;buf[..]);
+</code></pre>
+<p><code>monster</code> is of type <code>Monster</code>, and points to somewhere <em>inside</em> your
+buffer (root object pointers are not the same as <code>buffer_pointer</code> !).
+If you look in your generated header, you'll see it has
+convenient accessors for all fields, e.g. <code>hp()</code>, <code>mana()</code>, etc:</p>
+<pre><code class="language-{.rs}">        println!(&quot;{}&quot;, monster.hp());     // `80`
+        println!(&quot;{}&quot;, monster.mana());   // default value of `150`
+        println!(&quot;{:?}&quot;, monster.name()); // Some(&quot;MyMonster&quot;)
+    }
+</code></pre>
+<p><em>Note: That we never stored a <code>mana</code> value, so it will return the default.</em></p>
+<h2 id="direct-memory-access"><a class="header" href="#direct-memory-access">Direct memory access</a></h2>
+<p>As you can see from the above examples, all elements in a buffer are
+accessed through generated accessors. This is because everything is
+stored in little endian format on all platforms (the accessor
+performs a swap operation on big endian machines), and also because
+the layout of things is generally not known to the user.</p>
+<p>For structs, layout is deterministic and guaranteed to be the same
+across platforms (scalars are aligned to their
+own size, and structs themselves to their largest member), and you
+are allowed to access this memory directly by using <code>safe_slice</code>
+on the reference to a struct, or even an array of structs.</p>
+<p>To compute offsets to sub-elements of a struct, make sure they
+are structs themselves, as then you can use the pointers to
+figure out the offset without having to hardcode it. This is
+handy for use of arrays of structs with calls like <code>glVertexAttribPointer</code>
+in OpenGL or similar APIs.</p>
+<p>It is important to note is that structs are still little endian on all
+machines, so the functions to enable tricks like this are only exposed on little
+endian machines. If you also ship on big endian machines, using an
+<code>#[cfg(target_endian = &quot;little&quot;)]</code> attribute would be wise or your code will not
+compile.</p>
+<p>The special function <code>safe_slice</code> is implemented on Vector objects that are
+represented in memory the same way as they are represented on the wire. This
+function is always available on vectors of struct, bool, u8, and i8. It is
+conditionally-compiled on little-endian systems for all the remaining scalar
+types.</p>
+<p>The FlatBufferBuilder function <code>create_vector_direct</code> is implemented for all
+types that are endian-safe to write with a <code>memcpy</code>. It is the write-equivalent
+of <code>safe_slice</code>.</p>
+<h2 id="access-of-untrusted-buffers"><a class="header" href="#access-of-untrusted-buffers">Access of untrusted buffers</a></h2>
+<p>The safe Rust functions to interpret a slice as a table (<code>root</code>,
+<code>size_prefixed_root</code>, <code>root_with_opts</code>, and <code>size_prefixed_root_with_opts</code>)
+verify the data first. This has some performance cost, but is intended to be
+safe for use on flatbuffers from untrusted sources. There are corresponding
+<code>unsafe</code> versions with names ending in <code>_unchecked</code> which skip this
+verification, and may access arbitrary memory.</p>
+<p>The generated accessor functions access fields over offsets, which is
+very quick. The current implementation uses these to access memory without any
+further bounds checking. All of the safe Rust APIs ensure the verifier is run
+over these flatbuffers before accessing them.</p>
+<p>When you're processing large amounts of data from a source you know (e.g.
+your own generated data on disk), the <code>_unchecked</code> versions are acceptable, but
+when reading data from the network that can potentially have been modified by an
+attacker, it is desirable to use the safe versions which use the verifier.</p>
+<h2 id="threading"><a class="header" href="#threading">Threading</a></h2>
+<p>Reading a FlatBuffer does not touch any memory outside the original buffer,
+and is entirely read-only (all immutable), so is safe to access from multiple
+threads even without synchronisation primitives.</p>
+<p>Creating a FlatBuffer is not thread safe. All state related to building
+a FlatBuffer is contained in a FlatBufferBuilder instance, and no memory
+outside of it is touched. To make this thread safe, either do not
+share instances of FlatBufferBuilder between threads (recommended), or
+manually wrap it in synchronisation primitives. There's no automatic way to
+accomplish this, by design, as we feel multithreaded construction
+of a single buffer will be rare, and synchronisation overhead would be costly.</p>
+<p>Unlike most other languages, in Rust these properties are exposed to and
+enforced by the type system. <code>flatbuffers::Table</code> and the generated table types
+are <code>Send + Sync</code>, indicating they may be freely shared across threads and data
+may be accessed from any thread which receives a const (aka shared) reference.
+There are no functions which require a mutable (aka exclusive) reference, which
+means all the available functions may be called like this.
+<code>flatbuffers::FlatBufferBuilder</code> is also <code>Send + Sync</code>, but all of the mutating
+functions require a mutable (aka exclusive) reference which can only be created
+when no other references to the <code>FlatBufferBuilder</code> exist, and may not be copied
+within the same thread, let alone to a second thread.</p>
+<h2 id="useful-tools-created-by-others"><a class="header" href="#useful-tools-created-by-others">Useful tools created by others</a></h2>
+<ul>
+<li><a href="https://github.com/frol/flatc-rust">flatc-rust</a> - FlatBuffers compiler
+(flatc) as API for transparent <code>.fbs</code> to <code>.rs</code> code-generation via Cargo
+build scripts integration.</li>
+</ul>
+<br>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="PythonUsage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="SwiftUsage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="PythonUsage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="SwiftUsage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

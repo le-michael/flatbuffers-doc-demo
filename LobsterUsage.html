@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Lobster Usage - Flatbuffers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="FlatBuffers.html"><strong aria-hidden="true">1.</strong> Flatbuffers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Internals.html"><strong aria-hidden="true">1.1.</strong> Flatbuffers internals</a></li></ol></li><li class="chapter-item expanded "><a href="Schemas.html"><strong aria-hidden="true">2.</strong> Writing a schema</a></li><li class="chapter-item expanded "><a href="Compiler.html"><strong aria-hidden="true">3.</strong> flatc CLI</a></li><li class="chapter-item expanded "><a href="FlexBuffers.html"><strong aria-hidden="true">4.</strong> Flexbuffers</a></li><li class="chapter-item expanded "><a href="Benchmarks.html"><strong aria-hidden="true">5.</strong> Benchmarks</a></li><li class="chapter-item expanded "><a href="Support.html"><strong aria-hidden="true">6.</strong> Language Support</a></li><li class="chapter-item expanded "><a href="Tutorial.html"><strong aria-hidden="true">7.</strong> Tutorial</a></li><li class="chapter-item expanded "><a href="WhitePaper.html"><strong aria-hidden="true">8.</strong> White Paper</a></li><li class="chapter-item expanded affix "><li class="part-title">Guides</li><li class="chapter-item expanded "><a href="CppUsage.html"><strong aria-hidden="true">9.</strong> C++ Usage</a></li><li class="chapter-item expanded "><a href="CsharpUsage.html"><strong aria-hidden="true">10.</strong> C# Usage</a></li><li class="chapter-item expanded "><a href="CUsage.html"><strong aria-hidden="true">11.</strong> C Usage</a></li><li class="chapter-item expanded "><a href="DartUsage.html"><strong aria-hidden="true">12.</strong> Dart Usage</a></li><li class="chapter-item expanded "><a href="GoUsage.html"><strong aria-hidden="true">13.</strong> Go Usage</a></li><li class="chapter-item expanded "><a href="JavaScriptUsage.html"><strong aria-hidden="true">14.</strong> JavaScript Usage</a></li><li class="chapter-item expanded "><a href="JavaUsage.html"><strong aria-hidden="true">15.</strong> Java Usage</a></li><li class="chapter-item expanded "><a href="KotlinUsage.html"><strong aria-hidden="true">16.</strong> Kotlin Usage</a></li><li class="chapter-item expanded "><a href="LobsterUsage.html" class="active"><strong aria-hidden="true">17.</strong> Lobster Usage</a></li><li class="chapter-item expanded "><a href="LuaUsage.html"><strong aria-hidden="true">18.</strong> Lua Usage</a></li><li class="chapter-item expanded "><a href="PHPUsage.html"><strong aria-hidden="true">19.</strong> PHP Usage</a></li><li class="chapter-item expanded "><a href="PythonUsage.html"><strong aria-hidden="true">20.</strong> Python Usage</a></li><li class="chapter-item expanded "><a href="RustUsage.html"><strong aria-hidden="true">21.</strong> Rust Usage</a></li><li class="chapter-item expanded "><a href="SwiftUsage.html"><strong aria-hidden="true">22.</strong> Swift Usage</a></li><li class="chapter-item expanded "><a href="TypeScriptUsage.html"><strong aria-hidden="true">23.</strong> TypeScript Usage</a></li><li class="chapter-item expanded affix "><li class="part-title">Contributing</li><li class="chapter-item expanded "><a href="Building.html"><strong aria-hidden="true">24.</strong> Building</a></li><li class="chapter-item expanded "><a href="Grammar.html"><strong aria-hidden="true">25.</strong> Schema Grammar</a></li><li class="chapter-item expanded "><a href="IntermediateRepresentation.html"><strong aria-hidden="true">26.</strong> Intermediate Representation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Flatbuffers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="use-in-lobster----flatbuffers_guide_use_lobster"><a class="header" href="#use-in-lobster----flatbuffers_guide_use_lobster">Use in Lobster    {#flatbuffers_guide_use_lobster}</a></h1>
+<h2 id="before-you-get-started"><a class="header" href="#before-you-get-started">Before you get started</a></h2>
+<p>Before diving into the FlatBuffers usage in Lobster, it should be noted that the
+[Tutorial](@ref flatbuffers_guide_tutorial) page has a complete guide to general
+FlatBuffers usage in all of the supported languages (including Lobster). This
+page is designed to cover the nuances of FlatBuffers usage, specific to
+Lobster.</p>
+<p>You should also have read the [Building](@ref flatbuffers_guide_building)
+documentation to build <code>flatc</code> and should be familiar with
+[Using the schema compiler](@ref flatbuffers_guide_using_schema_compiler) and
+[Writing a schema](@ref flatbuffers_guide_writing_schema).</p>
+<h2 id="flatbuffers-lobster-library-code-location"><a class="header" href="#flatbuffers-lobster-library-code-location">FlatBuffers Lobster library code location</a></h2>
+<p>The code for the FlatBuffers Lobster library can be found at
+<code>flatbuffers/lobster</code>. You can browse the library code on the
+[FlatBuffers GitHub page](https://github.com/google/flatbuffers/tree/master/
+lobster).</p>
+<h2 id="testing-the-flatbuffers-lobster-library"><a class="header" href="#testing-the-flatbuffers-lobster-library">Testing the FlatBuffers Lobster library</a></h2>
+<p>The code to test the Lobster library can be found at <code>flatbuffers/tests</code>.
+The test code itself is located in [lobstertest.lobster](https://github.com/google/
+flatbuffers/blob/master/tests/lobstertest.lobster).</p>
+<p>To run the tests, run <code>lobster lobstertest.lobster</code>. To obtain Lobster itself,
+go to the <a href="http://strlen.com/lobster">Lobster homepage</a> or
+<a href="https://github.com/aardappel/lobster">github</a> to learn how to build it for your
+platform.</p>
+<h2 id="using-the-flatbuffers-lobster-library"><a class="header" href="#using-the-flatbuffers-lobster-library">Using the FlatBuffers Lobster library</a></h2>
+<p><em>Note: See [Tutorial](@ref flatbuffers_guide_tutorial) for a more in-depth
+example of how to use FlatBuffers in Lobster.</em></p>
+<p>There is support for both reading and writing FlatBuffers in Lobster.</p>
+<p>To use FlatBuffers in your own code, first generate Lobster classes from your
+schema with the <code>--lobster</code> option to <code>flatc</code>. Then you can include both
+FlatBuffers and the generated code to read or write a FlatBuffer.</p>
+<p>For example, here is how you would read a FlatBuffer binary file in Lobster:
+First, import the library and the generated code. Then read a FlatBuffer binary
+file into a string, which you pass to the <code>GetRootAsMonster</code> function:</p>
+<pre><code class="language-{.lobster}">    include &quot;monster_generated.lobster&quot;
+
+    let fb = read_file(&quot;monsterdata_test.mon&quot;)
+    assert fb
+    let monster = MyGame_Example_GetRootAsMonster(fb)
+</code></pre>
+<p>Now you can access values like this:</p>
+<pre><code class="language-{.lobster}">    let hp = monster.hp
+    let pos = monster.pos
+</code></pre>
+<p>As you can see, even though <code>hp</code> and <code>pos</code> are functions that access FlatBuffer
+data in-place in the string buffer, they appear as field accesses.</p>
+<h2 id="speed"><a class="header" href="#speed">Speed</a></h2>
+<p>Using FlatBuffers in Lobster should be relatively fast, as the implementation
+makes use of native support for writing binary values, and access of vtables.
+Both generated code and the runtime library are therefore small and fast.</p>
+<p>Actual speed will depend on whether you use Lobster as bytecode VM or compiled to
+C++.</p>
+<h2 id="text-parsing"><a class="header" href="#text-parsing">Text Parsing</a></h2>
+<p>Lobster has full support for parsing JSON into FlatBuffers, or generating
+JSON from FlatBuffers. See <code>samples/sample_test.lobster</code> for an example.</p>
+<p>This uses the C++ parser and generator underneath, so should be both fast and
+conformant.</p>
+<br>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="KotlinUsage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="LuaUsage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="KotlinUsage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="LuaUsage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

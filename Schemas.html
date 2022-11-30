@@ -1,0 +1,771 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Writing a schema - Flatbuffers</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="FlatBuffers.html"><strong aria-hidden="true">1.</strong> Flatbuffers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Internals.html"><strong aria-hidden="true">1.1.</strong> Flatbuffers internals</a></li></ol></li><li class="chapter-item expanded "><a href="Schemas.html" class="active"><strong aria-hidden="true">2.</strong> Writing a schema</a></li><li class="chapter-item expanded "><a href="Compiler.html"><strong aria-hidden="true">3.</strong> flatc CLI</a></li><li class="chapter-item expanded "><a href="FlexBuffers.html"><strong aria-hidden="true">4.</strong> Flexbuffers</a></li><li class="chapter-item expanded "><a href="Benchmarks.html"><strong aria-hidden="true">5.</strong> Benchmarks</a></li><li class="chapter-item expanded "><a href="Support.html"><strong aria-hidden="true">6.</strong> Language Support</a></li><li class="chapter-item expanded "><a href="Tutorial.html"><strong aria-hidden="true">7.</strong> Tutorial</a></li><li class="chapter-item expanded "><a href="WhitePaper.html"><strong aria-hidden="true">8.</strong> White Paper</a></li><li class="chapter-item expanded affix "><li class="part-title">Guides</li><li class="chapter-item expanded "><a href="CppUsage.html"><strong aria-hidden="true">9.</strong> C++ Usage</a></li><li class="chapter-item expanded "><a href="CsharpUsage.html"><strong aria-hidden="true">10.</strong> C# Usage</a></li><li class="chapter-item expanded "><a href="CUsage.html"><strong aria-hidden="true">11.</strong> C Usage</a></li><li class="chapter-item expanded "><a href="DartUsage.html"><strong aria-hidden="true">12.</strong> Dart Usage</a></li><li class="chapter-item expanded "><a href="GoUsage.html"><strong aria-hidden="true">13.</strong> Go Usage</a></li><li class="chapter-item expanded "><a href="JavaScriptUsage.html"><strong aria-hidden="true">14.</strong> JavaScript Usage</a></li><li class="chapter-item expanded "><a href="JavaUsage.html"><strong aria-hidden="true">15.</strong> Java Usage</a></li><li class="chapter-item expanded "><a href="KotlinUsage.html"><strong aria-hidden="true">16.</strong> Kotlin Usage</a></li><li class="chapter-item expanded "><a href="LobsterUsage.html"><strong aria-hidden="true">17.</strong> Lobster Usage</a></li><li class="chapter-item expanded "><a href="LuaUsage.html"><strong aria-hidden="true">18.</strong> Lua Usage</a></li><li class="chapter-item expanded "><a href="PHPUsage.html"><strong aria-hidden="true">19.</strong> PHP Usage</a></li><li class="chapter-item expanded "><a href="PythonUsage.html"><strong aria-hidden="true">20.</strong> Python Usage</a></li><li class="chapter-item expanded "><a href="RustUsage.html"><strong aria-hidden="true">21.</strong> Rust Usage</a></li><li class="chapter-item expanded "><a href="SwiftUsage.html"><strong aria-hidden="true">22.</strong> Swift Usage</a></li><li class="chapter-item expanded "><a href="TypeScriptUsage.html"><strong aria-hidden="true">23.</strong> TypeScript Usage</a></li><li class="chapter-item expanded affix "><li class="part-title">Contributing</li><li class="chapter-item expanded "><a href="Building.html"><strong aria-hidden="true">24.</strong> Building</a></li><li class="chapter-item expanded "><a href="Grammar.html"><strong aria-hidden="true">25.</strong> Schema Grammar</a></li><li class="chapter-item expanded "><a href="IntermediateRepresentation.html"><strong aria-hidden="true">26.</strong> Intermediate Representation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Flatbuffers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="writing-a-schema----flatbuffers_guide_writing_schema"><a class="header" href="#writing-a-schema----flatbuffers_guide_writing_schema">Writing a schema    {#flatbuffers_guide_writing_schema}</a></h1>
+<p>The syntax of the schema language (aka IDL, <a href="https://en.wikipedia.org/wiki/Interface_description_language">Interface Definition Language</a>)
+should look quite familiar to users of any of the C family of
+languages, and also to users of other IDLs. Let's look at an example
+first:</p>
+<pre><code>// example IDL file
+
+namespace MyGame;
+
+attribute &quot;priority&quot;;
+
+enum Color : byte { Red = 1, Green, Blue }
+
+union Any { Monster, Weapon, Pickup }
+
+struct Vec3 {
+  x:float;
+  y:float;
+  z:float;
+}
+
+table Monster {
+  pos:Vec3;
+  mana:short = 150;
+  hp:short = 100;
+  name:string;
+  friendly:bool = false (deprecated, priority: 1);
+  inventory:[ubyte];
+  color:Color = Blue;
+  test:Any;
+}
+
+root_type Monster;
+</code></pre>
+<p>(<code>Weapon</code> &amp; <code>Pickup</code> not defined as part of this example).</p>
+<h3 id="tables"><a class="header" href="#tables">Tables</a></h3>
+<p>Tables are the main way of defining objects in FlatBuffers, and consist of a
+name (here <code>Monster</code>) and a list of fields. Each field has a name, a type, and
+optionally a default value. If the default value is not specified in the schema,
+it will be <code>0</code> for scalar types, or <code>null</code> for other types. Some languages
+support setting a scalar's default to <code>null</code>. This makes the scalar optional.</p>
+<p>Fields do not have to appear in the wire representation, and you can choose
+to omit fields when constructing an object. You have the flexibility to add
+fields without fear of bloating your data. This design is also FlatBuffer's
+mechanism for forward and backwards compatibility. Note that:</p>
+<ul>
+<li>
+<p>You can add new fields in the schema ONLY at the end of a table
+definition. Older data will still
+read correctly, and give you the default value when read. Older code
+will simply ignore the new field.
+If you want to have flexibility to use any order for fields in your
+schema, you can manually assign ids (much like Protocol Buffers),
+see the <code>id</code> attribute below.</p>
+</li>
+<li>
+<p>You cannot delete fields you don't use anymore from the schema,
+but you can simply
+stop writing them into your data for almost the same effect.
+Additionally you can mark them as <code>deprecated</code> as in the example
+above, which will prevent the generation of accessors in the
+generated C++, as a way to enforce the field not being used any more.
+(careful: this may break code!).</p>
+</li>
+<li>
+<p>You may change field names and table names, if you're ok with your
+code breaking until you've renamed them there too.</p>
+</li>
+</ul>
+<p>See &quot;Schema evolution examples&quot; below for more on this
+topic.</p>
+<h3 id="structs"><a class="header" href="#structs">Structs</a></h3>
+<p>Similar to a table, only now none of the fields are optional (so no defaults
+either), and fields may not be added or be deprecated. Structs may only contain
+scalars or other structs. Use this for
+simple objects where you are very sure no changes will ever be made
+(as quite clear in the example <code>Vec3</code>). Structs use less memory than
+tables and are even faster to access (they are always stored in-line in their
+parent object, and use no virtual table).</p>
+<h3 id="types"><a class="header" href="#types">Types</a></h3>
+<p>Built-in scalar types are</p>
+<ul>
+<li>
+<p>8 bit: <code>byte</code> (<code>int8</code>), <code>ubyte</code> (<code>uint8</code>), <code>bool</code></p>
+</li>
+<li>
+<p>16 bit: <code>short</code> (<code>int16</code>), <code>ushort</code> (<code>uint16</code>)</p>
+</li>
+<li>
+<p>32 bit: <code>int</code> (<code>int32</code>), <code>uint</code> (<code>uint32</code>), <code>float</code> (<code>float32</code>)</p>
+</li>
+<li>
+<p>64 bit: <code>long</code> (<code>int64</code>), <code>ulong</code> (<code>uint64</code>), <code>double</code> (<code>float64</code>)</p>
+</li>
+</ul>
+<p>The type names in parentheses are alias names such that for example
+<code>uint8</code> can be used in place of <code>ubyte</code>, and <code>int32</code> can be used in
+place of <code>int</code> without affecting code generation.</p>
+<p>Built-in non-scalar types:</p>
+<ul>
+<li>
+<p>Vector of any other type (denoted with <code>[type]</code>). Nesting vectors
+is not supported, instead you can wrap the inner vector in a table.</p>
+</li>
+<li>
+<p><code>string</code>, which may only hold UTF-8 or 7-bit ASCII. For other text encodings
+or general binary data use vectors (<code>[byte]</code> or <code>[ubyte]</code>) instead.</p>
+</li>
+<li>
+<p>References to other tables or structs, enums or unions (see
+below).</p>
+</li>
+</ul>
+<p>You can't change types of fields once they're used, with the exception
+of same-size data where a <code>reinterpret_cast</code> would give you a desirable result,
+e.g. you could change a <code>uint</code> to an <code>int</code> if no values in current data use the
+high bit yet.</p>
+<h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
+<p>Arrays are a convenience short-hand for a fixed-length collection of elements.
+Arrays can be used to replace the following schema:</p>
+<pre><code>struct Vec3 {
+    x:float;
+    y:float;
+    z:float;
+}
+</code></pre>
+<p>with the following schema:</p>
+<pre><code>struct Vec3 {
+    v:[float:3];
+}
+</code></pre>
+<p>Both representations are binary equivalent.</p>
+<p>Arrays are currently only supported in a <code>struct</code>.</p>
+<h3 id="default-optional-and-required-values"><a class="header" href="#default-optional-and-required-values">Default, Optional and Required Values</a></h3>
+<p>There are three, mutually exclusive, reactions to the non-presence of a table's
+field in the binary data:</p>
+<ol>
+<li>Default valued fields will return the default value (as defined in the schema).</li>
+<li>Optional valued fields will return some form of <code>null</code> depending on the
+local language. (In a sense, <code>null</code> is the default value).</li>
+<li>Required fields will cause an error. Flatbuffer verifiers would
+consider the whole buffer invalid. See the <code>required</code> tag below.</li>
+</ol>
+<p>When writing a schema, values are a sequence of digits. Values may be optionally
+followed by a decimal point (<code>.</code>) and more digits, for float constants, or
+optionally prefixed by a <code>-</code>. Floats may also be in scientific notation;
+optionally ending with an <code>e</code> or <code>E</code>, followed by a <code>+</code> or <code>-</code> and more digits.
+Values can also be the keyword <code>null</code>.</p>
+<p>Only scalar values can have defaults, non-scalar (string/vector/table) fields
+default to <code>null</code> when not present.</p>
+<p>You generally do not want to change default values after they're initially
+defined. Fields that have the default value are not actually stored in the
+serialized data (see also Gotchas below). Values explicitly written by code
+generated by the old schema old version, if they happen to be the default, will
+be read as a different value by code generated with the new schema. This is
+slightly less bad when converting an optional scalar into a default valued
+scalar since non-presence would not be overloaded with a previous default value.
+There are situations, however, where this may be desirable, especially if you
+can ensure a simultaneous rebuild of all code.</p>
+<h3 id="enums"><a class="header" href="#enums">Enums</a></h3>
+<p>Define a sequence of named constants, each with a given value, or
+increasing by one from the previous one. The default first value
+is <code>0</code>. As you can see in the enum declaration, you specify the underlying
+integral type of the enum with <code>:</code> (in this case <code>byte</code>), which then determines
+the type of any fields declared with this enum type.</p>
+<p>Only integer types are allowed, i.e. <code>byte</code>, <code>ubyte</code>, <code>short</code> <code>ushort</code>, <code>int</code>,
+<code>uint</code>, <code>long</code> and <code>ulong</code>.</p>
+<p>Typically, enum values should only ever be added, never removed (there is no
+deprecation for enums). This requires code to handle forwards compatibility
+itself, by handling unknown enum values.</p>
+<h3 id="unions"><a class="header" href="#unions">Unions</a></h3>
+<p>Unions share a lot of properties with enums, but instead of new names
+for constants, you use names of tables. You can then declare
+a union field, which can hold a reference to any of those types, and
+additionally a field with the suffix <code>_type</code> is generated that holds
+the corresponding enum value, allowing you to know which type to cast
+to at runtime.</p>
+<p>It's possible to give an alias name to a type union. This way a type can even be
+used to mean different things depending on the name used:</p>
+<pre><code>table PointPosition { x:uint; y:uint; }
+table MarkerPosition {}
+union Position {
+  Start:MarkerPosition,
+  Point:PointPosition,
+  Finish:MarkerPosition
+}
+</code></pre>
+<p>Unions contain a special <code>NONE</code> marker to denote that no value is stored so that
+name cannot be used as an alias.</p>
+<p>Unions are a good way to be able to send multiple message types as a FlatBuffer.
+Note that because a union field is really two fields, it must always be
+part of a table, it cannot be the root of a FlatBuffer by itself.</p>
+<p>If you have a need to distinguish between different FlatBuffers in a more
+open-ended way, for example for use as files, see the file identification
+feature below.</p>
+<p>There is an experimental support only in C++ for a vector of unions (and
+types). In the example IDL file above, use [Any] to add a vector of Any to
+Monster table. There is also experimental support for other types besides
+tables in unions, in particular structs and strings. There's no direct support
+for scalars in unions, but they can be wrapped in a struct at no space cost.</p>
+<h3 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h3>
+<p>These will generate the corresponding namespace in C++ for all helper
+code, and packages in Java. You can use <code>.</code> to specify nested namespaces /
+packages.</p>
+<h3 id="includes"><a class="header" href="#includes">Includes</a></h3>
+<p>You can include other schemas files in your current one, e.g.:</p>
+<pre><code>include &quot;mydefinitions.fbs&quot;;
+</code></pre>
+<p>This makes it easier to refer to types defined elsewhere. <code>include</code>
+automatically ensures each file is parsed just once, even when referred to
+more than once.</p>
+<p>When using the <code>flatc</code> compiler to generate code for schema definitions,
+only definitions in the current file will be generated, not those from the
+included files (those you still generate separately).</p>
+<h3 id="root-type"><a class="header" href="#root-type">Root type</a></h3>
+<p>This declares what you consider to be the root table of the serialized
+data. This is particularly important for parsing JSON data, which doesn't
+include object type information.</p>
+<h3 id="file-identification-and-extension"><a class="header" href="#file-identification-and-extension">File identification and extension</a></h3>
+<p>Typically, a FlatBuffer binary buffer is not self-describing, i.e. it
+needs you to know its schema to parse it correctly. But if you
+want to use a FlatBuffer as a file format, it would be convenient
+to be able to have a &quot;magic number&quot; in there, like most file formats
+have, to be able to do a sanity check to see if you're reading the
+kind of file you're expecting.</p>
+<p>Now, you can always prefix a FlatBuffer with your own file header,
+but FlatBuffers has a built-in way to add an identifier to a
+FlatBuffer that takes up minimal space, and keeps the buffer
+compatible with buffers that don't have such an identifier.</p>
+<p>You can specify in a schema, similar to <code>root_type</code>, that you intend
+for this type of FlatBuffer to be used as a file format:</p>
+<pre><code>file_identifier &quot;MYFI&quot;;
+</code></pre>
+<p>Identifiers must always be exactly 4 characters long. These 4 characters
+will end up as bytes at offsets 4-7 (inclusive) in the buffer.</p>
+<p>For any schema that has such an identifier, <code>flatc</code> will automatically
+add the identifier to any binaries it generates (with <code>-b</code>),
+and generated calls like <code>FinishMonsterBuffer</code> also add the identifier.
+If you have specified an identifier and wish to generate a buffer
+without one, you can always still do so by calling
+<code>FlatBufferBuilder::Finish</code> explicitly.</p>
+<p>After loading a buffer, you can use a call like
+<code>MonsterBufferHasIdentifier</code> to check if the identifier is present.</p>
+<p>Note that this is best for open-ended uses such as files. If you simply wanted
+to send one of a set of possible messages over a network for example, you'd
+be better off with a union.</p>
+<p>Additionally, by default <code>flatc</code> will output binary files as <code>.bin</code>.
+This declaration in the schema will change that to whatever you want:</p>
+<pre><code>file_extension &quot;ext&quot;;
+</code></pre>
+<h3 id="rpc-interface-declarations"><a class="header" href="#rpc-interface-declarations">RPC interface declarations</a></h3>
+<p>You can declare RPC calls in a schema, that define a set of functions
+that take a FlatBuffer as an argument (the request) and return a FlatBuffer
+as the response (both of which must be table types):</p>
+<pre><code>rpc_service MonsterStorage {
+  Store(Monster):StoreResponse;
+  Retrieve(MonsterId):Monster;
+}
+</code></pre>
+<p>What code this produces and how it is used depends on language and RPC system
+used, there is preliminary support for GRPC through the <code>--grpc</code> code generator,
+see <code>grpc/tests</code> for an example.</p>
+<h3 id="comments--documentation"><a class="header" href="#comments--documentation">Comments &amp; documentation</a></h3>
+<p>May be written as in most C-based languages. Additionally, a triple
+comment (<code>///</code>) on a line by itself signals that a comment is documentation
+for whatever is declared on the line after it
+(table/struct/field/enum/union/element), and the comment is output
+in the corresponding C++ code. Multiple such lines per item are allowed.</p>
+<h3 id="attributes"><a class="header" href="#attributes">Attributes</a></h3>
+<p>Attributes may be attached to a declaration, behind a field/enum value,
+or after the name of a table/struct/enum/union. These may either have
+a value or not. Some attributes like <code>deprecated</code> are understood by
+the compiler; user defined ones need to be declared with the attribute
+declaration (like <code>priority</code> in the example above), and are
+available to query if you parse the schema at runtime.
+This is useful if you write your own code generators/editors etc., and
+you wish to add additional information specific to your tool (such as a
+help text).</p>
+<p>Current understood attributes:</p>
+<ul>
+<li><code>id: n</code> (on a table field): manually set the field identifier to <code>n</code>.
+If you use this attribute, you must use it on ALL fields of this table,
+and the numbers must be a contiguous range from 0 onwards.
+Additionally, since a union type effectively adds two fields, its
+id must be that of the second field (the first field is the type
+field and not explicitly declared in the schema).
+For example, if the last field before the union field had id 6,
+the union field should have id 8, and the unions type field will
+implicitly be 7.
+IDs allow the fields to be placed in any order in the schema.
+When a new field is added to the schema it must use the next available ID.</li>
+<li><code>deprecated</code> (on a field): do not generate accessors for this field
+anymore, code should stop using this data. Old data may still contain this
+field, but it won't be accessible anymore by newer code. Note that if you
+deprecate a field that was previous required, old code may fail to validate
+new data (when using the optional verifier).</li>
+<li><code>required</code> (on a non-scalar table field): this field must always be set.
+By default, fields do not need to be present in the binary. This is
+desirable, as it helps with forwards/backwards compatibility, and
+flexibility of data structures. By specifying this attribute, you make non-
+presence in an error for both reader and writer. The reading code may access
+the field directly, without checking for null. If the constructing code does
+not initialize this field, they will get an assert, and also the verifier
+will fail on buffers that have missing required fields. Both adding and
+removing this attribute may be forwards/backwards incompatible as readers
+will be unable read old or new data, respectively, unless the data happens to
+always have the field set.</li>
+<li><code>force_align: size</code> (on a struct): force the alignment of this struct
+to be something higher than what it is naturally aligned to. Causes
+these structs to be aligned to that amount inside a buffer, IF that
+buffer is allocated with that alignment (which is not necessarily
+the case for buffers accessed directly inside a <code>FlatBufferBuilder</code>).
+Note: currently not guaranteed to have an effect when used with
+<code>--object-api</code>, since that may allocate objects at alignments less than
+what you specify with <code>force_align</code>.</li>
+<li><code>force_align: size</code> (on a vector): force the alignment of this vector to be
+something different than what the element size would normally dictate.
+Note: Now only work for generated C++ code.</li>
+<li><code>bit_flags</code> (on an unsigned enum): the values of this field indicate bits,
+meaning that any unsigned value N specified in the schema will end up
+representing 1&lt;&lt;N, or if you don't specify values at all, you'll get
+the sequence 1, 2, 4, 8, ...</li>
+<li><code>nested_flatbuffer: &quot;table_name&quot;</code> (on a field): this indicates that the field
+(which must be a vector of ubyte) contains flatbuffer data, for which the
+root type is given by <code>table_name</code>. The generated code will then produce
+a convenient accessor for the nested FlatBuffer.</li>
+<li><code>flexbuffer</code> (on a field): this indicates that the field
+(which must be a vector of ubyte) contains flexbuffer data. The generated
+code will then produce a convenient accessor for the FlexBuffer root.</li>
+<li><code>key</code> (on a field): this field is meant to be used as a key when sorting
+a vector of the type of table it sits in. Can be used for in-place
+binary search.</li>
+<li><code>hash</code> (on a field). This is an (un)signed 32/64 bit integer field, whose
+value during JSON parsing is allowed to be a string, which will then be
+stored as its hash. The value of attribute is the hashing algorithm to
+use, one of <code>fnv1_32</code> <code>fnv1_64</code> <code>fnv1a_32</code> <code>fnv1a_64</code>.</li>
+<li><code>original_order</code> (on a table): since elements in a table do not need
+to be stored in any particular order, they are often optimized for
+space by sorting them to size. This attribute stops that from happening.
+There should generally not be any reason to use this flag.</li>
+<li>'native_*'.  Several attributes have been added to support the [C++ object
+Based API](@ref flatbuffers_cpp_object_based_api).  All such attributes
+are prefixed with the term &quot;native_&quot;.</li>
+</ul>
+<h2 id="json-parsing"><a class="header" href="#json-parsing">JSON Parsing</a></h2>
+<p>The same parser that parses the schema declarations above is also able
+to parse JSON objects that conform to this schema. So, unlike other JSON
+parsers, this parser is strongly typed, and parses directly into a FlatBuffer
+(see the compiler documentation on how to do this from the command line, or
+the C++ documentation on how to do this at runtime).</p>
+<p>Besides needing a schema, there are a few other changes to how it parses
+JSON:</p>
+<ul>
+<li>It accepts field names with and without quotes, like many JSON parsers
+already do. It outputs them without quotes as well, though can be made
+to output them using the <code>strict_json</code> flag.</li>
+<li>If a field has an enum type, the parser will recognize symbolic enum
+values (with or without quotes) instead of numbers, e.g.
+<code>field: EnumVal</code>. If a field is of integral type, you can still use
+symbolic names, but values need to be prefixed with their type and
+need to be quoted, e.g. <code>field: &quot;Enum.EnumVal&quot;</code>. For enums
+representing flags, you may place multiple inside a string
+separated by spaces to OR them, e.g.
+<code>field: &quot;EnumVal1 EnumVal2&quot;</code> or <code>field: &quot;Enum.EnumVal1 Enum.EnumVal2&quot;</code>.</li>
+<li>Similarly, for unions, these need to specified with two fields much like
+you do when serializing from code. E.g. for a field <code>foo</code>, you must
+add a field <code>foo_type: FooOne</code> right before the <code>foo</code> field, where
+<code>FooOne</code> would be the table out of the union you want to use.</li>
+<li>A field that has the value <code>null</code> (e.g. <code>field: null</code>) is intended to
+have the default value for that field (thus has the same effect as if
+that field wasn't specified at all).</li>
+<li>It has some built in conversion functions, so you can write for example
+<code>rad(180)</code> where ever you'd normally write <code>3.14159</code>.
+Currently supports the following functions: <code>rad</code>, <code>deg</code>, <code>cos</code>, <code>sin</code>,
+<code>tan</code>, <code>acos</code>, <code>asin</code>, <code>atan</code>.</li>
+</ul>
+<p>When parsing JSON, it recognizes the following escape codes in strings:</p>
+<ul>
+<li><code>\n</code> - linefeed.</li>
+<li><code>\t</code> - tab.</li>
+<li><code>\r</code> - carriage return.</li>
+<li><code>\b</code> - backspace.</li>
+<li><code>\f</code> - form feed.</li>
+<li><code>\&quot;</code> - double quote.</li>
+<li><code>\\</code> - backslash.</li>
+<li><code>\/</code> - forward slash.</li>
+<li><code>\uXXXX</code> - 16-bit unicode code point, converted to the equivalent UTF-8
+representation.</li>
+<li><code>\xXX</code> - 8-bit binary hexadecimal number XX. This is the only one that is
+not in the JSON spec (see http://json.org/), but is needed to be able to
+encode arbitrary binary in strings to text and back without losing
+information (e.g. the byte 0xFF can't be represented in standard JSON).</li>
+</ul>
+<p>It also generates these escape codes back again when generating JSON from a
+binary representation.</p>
+<p>When parsing numbers, the parser is more flexible than JSON.
+A format of numeric literals is more close to the C/C++.
+According to the [grammar](@ref flatbuffers_grammar), it accepts the following
+numerical literals:</p>
+<ul>
+<li>
+<p>An integer literal can have any number of leading zero <code>0</code> digits.
+Unlike C/C++, the parser ignores a leading zero, not interpreting it as the
+beginning of the octal number.
+The numbers <code>[081, -00094]</code> are equal to <code>[81, -94]</code>  decimal integers.</p>
+</li>
+<li>
+<p>The parser accepts unsigned and signed hexadecimal integer numbers.
+For example: <code>[0x123, +0x45, -0x67]</code> are equal to <code>[291, 69, -103]</code> decimals.</p>
+</li>
+<li>
+<p>The format of float-point numbers is fully compatible with C/C++ format.
+If a modern C++ compiler is used the parser accepts hexadecimal and special
+floating-point literals as well:
+<code>[-1.0, 2., .3e0, 3.e4, 0x21.34p-5, -inf, nan]</code>.</p>
+<p>The following conventions for floating-point numbers are used:</p>
+<ul>
+<li>The exponent suffix of hexadecimal floating-point number is mandatory.</li>
+<li>Parsed <code>NaN</code> converted to unsigned IEEE-754 <code>quiet-NaN</code> value.</li>
+</ul>
+<p>Extended floating-point support was tested with:</p>
+<ul>
+<li>x64 Windows: <code>MSVC2015</code> and higher.</li>
+<li>x64 Linux: <code>LLVM 6.0</code>, <code>GCC 4.9</code> and higher.</li>
+</ul>
+<p>For details, see [Use in C++](@ref flatbuffers_guide_use_cpp) section.</p>
+</li>
+<li>
+<p>For compatibility with a JSON lint tool all numeric literals of scalar
+fields can be wrapped to quoted string:
+<code>&quot;1&quot;, &quot;2.0&quot;, &quot;0x48A&quot;, &quot;0x0C.0Ep-1&quot;, &quot;-inf&quot;, &quot;true&quot;</code>.</p>
+</li>
+</ul>
+<h2 id="guidelines"><a class="header" href="#guidelines">Guidelines</a></h2>
+<h3 id="efficiency"><a class="header" href="#efficiency">Efficiency</a></h3>
+<p>FlatBuffers is all about efficiency, but to realize that efficiency you
+require an efficient schema. There are usually multiple choices on
+how to represent data that have vastly different size characteristics.</p>
+<p>It is very common nowadays to represent any kind of data as dictionaries
+(as in e.g. JSON), because of its flexibility and extensibility. While
+it is possible to emulate this in FlatBuffers (as a vector
+of tables with key and value(s)), this is a bad match for a strongly
+typed system like FlatBuffers, leading to relatively large binaries.
+FlatBuffer tables are more flexible than classes/structs in most systems,
+since having a large number of fields only few of which are actually
+used is still efficient. You should thus try to organize your data
+as much as possible such that you can use tables where you might be
+tempted to use a dictionary.</p>
+<p>Similarly, strings as values should only be used when they are
+truly open-ended. If you can, always use an enum instead.</p>
+<p>FlatBuffers doesn't have inheritance, so the way to represent a set
+of related data structures is a union. Unions do have a cost however,
+so an alternative to a union is to have a single table that has
+all the fields of all the data structures you are trying to
+represent, if they are relatively similar / share many fields.
+Again, this is efficient because non-present fields are cheap.</p>
+<p>FlatBuffers supports the full range of integer sizes, so try to pick
+the smallest size needed, rather than defaulting to int/long.</p>
+<p>Remember that you can share data (refer to the same string/table
+within a buffer), so factoring out repeating data into its own
+data structure may be worth it.</p>
+<h3 id="style-guide"><a class="header" href="#style-guide">Style guide</a></h3>
+<p>Identifiers in a schema are meant to translate to many different programming
+languages, so using the style of your &quot;main&quot; language is generally a bad idea.</p>
+<p>For this reason, below is a suggested style guide to adhere to, to keep schemas
+consistent for interoperation regardless of the target language.</p>
+<p>Where possible, the code generators for specific languages will generate
+identifiers that adhere to the language style, based on the schema identifiers.</p>
+<ul>
+<li>Table, struct, enum and rpc names (types): UpperCamelCase.</li>
+<li>Table and struct field names: snake_case. This is translated to lowerCamelCase
+automatically for some languages, e.g. Java.</li>
+<li>Enum values: UpperCamelCase.</li>
+<li>namespaces: UpperCamelCase.</li>
+</ul>
+<p>Formatting (this is less important, but still worth adhering to):</p>
+<ul>
+<li>Opening brace: on the same line as the start of the declaration.</li>
+<li>Spacing: Indent by 2 spaces. None around <code>:</code> for types, on both sides for <code>=</code>.</li>
+</ul>
+<p>For an example, see the schema at the top of this file.</p>
+<h2 id="gotchas"><a class="header" href="#gotchas">Gotchas</a></h2>
+<h3 id="schemas-and-version-control"><a class="header" href="#schemas-and-version-control">Schemas and version control</a></h3>
+<p>FlatBuffers relies on new field declarations being added at the end, and earlier
+declarations to not be removed, but be marked deprecated when needed. We think
+this is an improvement over the manual number assignment that happens in
+Protocol Buffers (and which is still an option using the <code>id</code> attribute
+mentioned above).</p>
+<p>One place where this is possibly problematic however is source control. If user
+A adds a field, generates new binary data with this new schema, then tries to
+commit both to source control after user B already committed a new field also,
+and just auto-merges the schema, the binary files are now invalid compared to
+the new schema.</p>
+<p>The solution of course is that you should not be generating binary data before
+your schema changes have been committed, ensuring consistency with the rest of
+the world. If this is not practical for you, use explicit field ids, which
+should always generate a merge conflict if two people try to allocate the same
+id.</p>
+<h3 id="schema-evolution-examples-tables"><a class="header" href="#schema-evolution-examples-tables">Schema evolution examples (tables)</a></h3>
+<p>Some examples to clarify what happens as you change a schema:</p>
+<p>If we have the following original schema:</p>
+<pre><code>table { a:int; b:int; }
+</code></pre>
+<p>And we extend it:</p>
+<pre><code>table { a:int; b:int; c:int; }
+</code></pre>
+<p>This is ok. Code compiled with the old schema reading data generated with the
+new one will simply ignore the presence of the new field. Code compiled with the
+new schema reading old data will get the default value for <code>c</code> (which is 0
+in this case, since it is not specified).</p>
+<pre><code>table { a:int (deprecated); b:int; }
+</code></pre>
+<p>This is also ok. Code compiled with the old schema reading newer data will now
+always get the default value for <code>a</code> since it is not present. Code compiled
+with the new schema now cannot read nor write <code>a</code> anymore (any existing code
+that tries to do so will result in compile errors), but can still read
+old data (they will ignore the field).</p>
+<pre><code>table { c:int; a:int; b:int; }
+</code></pre>
+<p>This is NOT ok, as this makes the schemas incompatible. Old code reading newer
+data will interpret <code>c</code> as if it was <code>a</code>, and new code reading old data
+accessing <code>a</code> will instead receive <code>b</code>.</p>
+<pre><code>table { c:int (id: 2); a:int (id: 0); b:int (id: 1); }
+</code></pre>
+<p>This is ok. If your intent was to order/group fields in a way that makes sense
+semantically, you can do so using explicit id assignment. Now we are compatible
+with the original schema, and the fields can be ordered in any way, as long as
+we keep the sequence of ids.</p>
+<pre><code>table { b:int; }
+</code></pre>
+<p>NOT ok. We can only remove a field by deprecation, regardless of whether we use
+explicit ids or not.</p>
+<pre><code>table { a:uint; b:uint; }
+</code></pre>
+<p>This is MAYBE ok, and only in the case where the type change is the same size,
+like here. If old data never contained any negative numbers, this will be
+safe to do.</p>
+<pre><code>table { a:int = 1; b:int = 2; }
+</code></pre>
+<p>Generally NOT ok. Any older data written that had 0 values were not written to
+the buffer, and rely on the default value to be recreated. These will now have
+those values appear to <code>1</code> and <code>2</code> instead. There may be cases in which this
+is ok, but care must be taken.</p>
+<pre><code>table { aa:int; bb:int; }
+</code></pre>
+<p>Occasionally ok. You've renamed fields, which will break all code (and JSON
+files!) that use this schema, but as long as the change is obvious, this is not
+incompatible with the actual binary buffers, since those only ever address
+fields by id/offset.</p>
+<h4 id="schema-evolution-examples-unions"><a class="header" href="#schema-evolution-examples-unions">Schema evolution examples (unions)</a></h4>
+<p>Suppose we have the following schema:</p>
+<pre><code>union Foo { A, B }
+</code></pre>
+<p>We can add another variant at the end.</p>
+<pre><code>union Foo { A, B, another_a: A }
+</code></pre>
+<p>and this will be okay. Old code will not recognize <code>another_a</code>.
+However if we add <code>another_a</code> anywhere but the end, e.g.</p>
+<pre><code>union Foo { A, another_a: A, B }
+</code></pre>
+<p>this is not okay. When new code writes <code>another_a</code>, old code will
+misinterpret it as <code>B</code> (and vice versa). However you can explicitly
+set the union's &quot;discriminant&quot; value like so:</p>
+<pre><code>union Foo { A = 1, another_a: A = 3, B = 2 }
+</code></pre>
+<p>This is okay.</p>
+<pre><code>union Foo { original_a: A = 1, another_a: A = 3, B = 2 }
+</code></pre>
+<p>Renaming fields will break code and any saved human readable representations,
+such as json files, but the binary buffers will be the same.</p>
+<br>
+<h3 id="testing-whether-a-field-is-present-in-a-table"><a class="header" href="#testing-whether-a-field-is-present-in-a-table">Testing whether a field is present in a table</a></h3>
+<p>Most serialization formats (e.g. JSON or Protocol Buffers) make it very
+explicit in the format whether a field is present in an object or not,
+allowing you to use this as &quot;extra&quot; information.</p>
+<p>FlatBuffers will not write fields that are equal to their default value,
+sometimes resulting in significant space savings. However, this also means we
+cannot disambiguate the meaning of non-presence as &quot;written default value&quot; or
+&quot;not written at all&quot;. This only applies to scalar fields since only they support
+default values. Unless otherwise specified, their default is 0.</p>
+<p>If you care about the presence of scalars, most languages support &quot;optional
+scalars.&quot; You can set <code>null</code> as the default value in the schema. <code>null</code> is a
+value that's outside of all types, so we will always write if <code>add_field</code> is
+called. The generated field accessor should use the local language's canonical
+optional type.</p>
+<p>Some <code>FlatBufferBuilder</code> implementations have an option called <code>force_defaults</code>
+that circumvents this &quot;not writing defaults&quot; behavior you can then use
+<code>IsFieldPresent</code> to query presence.
+/
+Another option that works in all languages is to wrap a scalar field in a
+struct. This way it will return null if it is not present. This will be slightly
+less ergonomic but structs don't take up any more space than the scalar they
+represent.</p>
+<h2 id="writing-your-own-code-generator"><a class="header" href="#writing-your-own-code-generator">Writing your own code generator.</a></h2>
+<p>See [our intermediate representation](@ref intermediate_representation).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Internals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="Compiler.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Internals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="Compiler.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
